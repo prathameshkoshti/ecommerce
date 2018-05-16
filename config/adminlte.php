@@ -146,16 +146,6 @@ return [
 				   'url'     => 'admin/category/list',
 				   'icon'    =>  'reorder',
 			    ],
-			    [
-				   'text'    => 'Model Details',
-				   'url'     => '#',
-				   'icon'    =>  'tags',
-			    ],
-			    [
-				   'text'    => 'Material Details',
-				   'url'     => 'admin/material/list',
-				   'icon'    =>  'cubes',
-			    ],
 			],
 		 ],
 	   	'Orders Information',

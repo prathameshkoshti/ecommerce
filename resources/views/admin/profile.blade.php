@@ -8,7 +8,7 @@
 		<br>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-4 col-md-offset-4">
 					<form action="profile/update" method="POST">
 						<table class="table table-borderless">
 							<tr>
@@ -30,7 +30,6 @@
 								<td>
 									<input type="text" class="form-control" value="{{Auth::user()->name}}" name="name" id="" required>
 								</td>
-
 							</tr>
 							<tr>
 								<td>
@@ -55,7 +54,6 @@
 								</td>
 							</tr>
 						</table>
-						<input type="hidden" name="id" value="{{Auth::user()->id}}">
 						@csrf
 						@method('PUT')
 					</form>
@@ -63,5 +61,7 @@
 			</div>
 		</div>
 	</center>
-	@include('layouts.resources')
+@stop
+@section('css')
+@include('layouts.resources')
 @stop

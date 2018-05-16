@@ -8,17 +8,22 @@
 		<br>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-5">
-					<form action="update_password" method="POST">
-						<table class="table tab-borderless">
+				<div class="col-md-4 col-md-offset-4">
+					<form action="/admin/update_password" method="POST">
+						<table class="table table-borderless">
 							<tr>
 								<td>
-									<input type="password" placeholder="Old Password" name="old_password" class="form-control" id="">
+									<input type="password" placeholder="Old Password" minlength="5" name="old_password" class="form-control" id="" required>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<input type="password" placeholder="New Password" class="form-control" name="new_password" id="">
+									<input type="password" placeholder="New Password" minlength="5" class="form-control" name="new_password" id="" required>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" value="Change Password" class="btn btn-success form-control">
 								</td>
 							</tr>
 						</table>
@@ -29,5 +34,7 @@
 			</div>
 		</div>
 	</center>
-	@include('layouts.resources')
+@stop
+@section('css')
+@include('layouts.resources')
 @stop
