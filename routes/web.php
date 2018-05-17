@@ -18,11 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 
+Route::get('/', 'HomeController@index')->name('home');
+//Admin Routes
+Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('/', 'HomeController@index')->name('home');
+	//Routes for User Management
+	Route::group(['prefix' => 'users'], function(){
 
-    Route::group(['prefix' => 'users'], function(){
         Route::get('/', 'UsersController@index');
 
         Route::get('create', 'UsersController@create');
@@ -34,8 +36,23 @@ Route::group(['prefix' => 'admin'], function(){
         Route::put('update/{id}', 'UsersController@update');
 
         Route::get('delete/{id}', 'UsersController@destroy');
-    });
+	});
 
+	Route::group(['prefix' => 'categories'], function(){
+		Route::get('/', 'CategoriesController@index');
+
+		Route::get('create', 'CategoriesController@create');
+		Route::put('store', 'CategoriesController@store');
+
+		Route::get('view/{id}', 'CategoriesController@show');
+
+		Route::get('edit/{id}', 'CategoriesController@edit');
+		Route::put('update/{id}', 'CategoriesController@update');
+
+		Route::get('delete/{id}', 'CategoriesController@destroy');
+	});
+
+	//Routes for Profile Management
     Route::get('profile', 'ProfilesController@show');
     Route::put('profile/update', 'ProfilesController@updateProfile');
 
@@ -43,14 +60,4 @@ Route::group(['prefix' => 'admin'], function(){
     Route::put('update_password', 'ProfilesController@updatePassword');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::view('home', 'users.home');

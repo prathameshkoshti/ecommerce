@@ -110,7 +110,7 @@ return [
     'menu' => [
         	'MAIN NAVIGATION',
         	[
-            	'text'        => 'Users Info',
+            	'text'        => 'Users Information',
             	'icon'        => 'users',
             	'submenu'     => [
 				[
@@ -131,26 +131,29 @@ return [
 				],
           	],
 		],
-		'Products Information',
 		[
-			'text'    =>    'Products',
+			'text'    =>    'Products Information',
 			'icon'    =>  'cube',
 			'submenu' => [
 			    [
-				   'text' => 'Product Details',
-				   'url'  => 'admin/products/list',
+				   'text' => 'Products',
+				   'url'  => 'admin/products',
 				   'icon'    =>  'cube',
 			    ],
 			    [
-				   'text'    => 'Category Details',
-				   'url'     => 'admin/category/list',
+				   'text'    => 'Category',
+				   'url'     => 'admin/categories',
 				   'icon'    =>  'reorder',
+			    ],
+			    [
+				   'text'    => 'Materials',
+				   'url'     => 'admin/categories',
+				   'icon'    =>  'cubes',
 			    ],
 			],
 		 ],
-	   	'Orders Information',
 	   	[
-			'text'    =>    'Orders',
+			'text'    =>    'Orders Information',
 			'icon'    =>    'tasks',
 			'submenu' => [
 				[
@@ -169,7 +172,7 @@ return [
 		[
 			'text' => 'Profile',
 			'url'  => 'admin/profile',
-			'icon' => 'user',
+			'icon' => 'address-card',
 		],
 		[
 			'text' => 'Change Password',

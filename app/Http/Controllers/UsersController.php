@@ -50,6 +50,7 @@ class UsersController extends Controller
 			'password' => bcrypt(request('password')),
 			'isAdmin' => ($request->isadmin == 'on' ? 1 : 0),
 			'created_by' => Auth::user()->id,
+			'updated_by' => Auth::user()->id,
 		]);
 
 		\Session::flash('create', 'User Added into the System.');

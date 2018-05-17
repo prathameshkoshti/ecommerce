@@ -59,6 +59,17 @@
 						</td>
 					</tr>
 					<tr>
+						<td>
+							Additional Information:
+						</td>
+						<td>
+							Created At: {{$user->created_at}}<br>
+							Created By: {{$user->created_by}}<br>
+							Updated At: {{$user->updated_at}}<br>
+							Updated By: {{$user->updated_by == '' ? 'NULL' : $user->updated_by}}
+						</td>
+					</tr>
+					<tr>
 					@if($user->isAdmin != 1)
 						<td>
 						</td>

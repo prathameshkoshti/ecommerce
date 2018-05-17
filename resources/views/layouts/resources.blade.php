@@ -52,4 +52,10 @@
 		z-index: 9999999999999999;
 		border: 0px;
 	}
+	.search-wrapper{
+		text-align: center;
+	}
+	.search{
+		display: inline-block
+	}
 </style>
