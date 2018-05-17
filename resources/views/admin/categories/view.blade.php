@@ -44,9 +44,9 @@
 					</td>
 					<td>
 						Created At: {{$category->created_at}}<br>
-						Created By: {{$category->created_by}}<br>
+						Created By: {{$category->createdBy->name}}<br>
 						Updated At: {{$category->updated_at}}<br>
-						Updated By: {{$category->updated_by == '' ? 'NULL' : $category->updated_by}}
+						Updated By: {{$category->updated_by == '' ? 'NULL' : $category->updatedBy->name}}
 					</td>
 				</tr>
 			</table>
