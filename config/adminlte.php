@@ -147,7 +147,7 @@ return [
 			    ],
 			    [
 				   'text'    => 'Materials',
-				   'url'     => 'admin/categories',
+				   'url'     => 'admin/materials',
 				   'icon'    =>  'cubes',
 			    ],
 			],

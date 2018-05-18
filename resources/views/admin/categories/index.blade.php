@@ -13,17 +13,17 @@
 <div class="container-fluid">
      <div class="row">
           <div class="col-md-8 col-md-offset-2">
-               <table id="category" class="table table-borderless text-center">
+               <table id="categories" class="table table-borderless text-center">
                     <thead>
 					<tr>
-						<td colspan="3">
+						<th colspan="3">
 							<div class="search-wrapper">
 								<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 							</div>
-						</td>
-						<td width=100px>
+						</th>
+						<th width=100px>
 							<button class="btn btn-primary" onclick="location.href='categories/create'"><i class="fa fa-plus"></i><b> Create</b></button>
-						</td>
+						</th>
 					</tr>
 					<tr>
 						<th>
@@ -77,16 +77,15 @@
 @section('js')
 <script>
 	function searchKeyword() {
-		var input, filter, table, tr, td1,td3,i;
+		var input, filter, table, tr, td1, i;
 		input = document.getElementById("searchField");
 		filter = input.value.toUpperCase();
-		table = document.getElementById("category");
+		table = document.getElementById("categories");
 		tr = table.getElementsByTagName("tr");
 		for (i = 0; i < tr.length; i++) {
-			td1 = tr[i].getElementsByTagName("td")[2];
-			td3 = tr[i].getElementsByTagName("td")[3];
-			if (td1 || td3) {
-				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
+			td1 = tr[i].getElementsByTagName("td")[1];
+			if (td1) {
+				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
 					tr[i].style.display = "";
 				} else {
 					tr[i].style.display = "none";

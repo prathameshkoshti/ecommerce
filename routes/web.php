@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
         Route::get('delete/{id}', 'UsersController@destroy');
 	});
 
+	//Routes for categories management
 	Route::group(['prefix' => 'categories'], function(){
 		Route::get('/', 'CategoriesController@index');
 
@@ -50,6 +51,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::put('update/{id}', 'CategoriesController@update');
 
 		Route::get('delete/{id}', 'CategoriesController@destroy');
+	});
+
+	//Routes for materials management
+	Route::group(['prefix' => 'materials'], function(){
+		Route::get('/', 'MaterialsController@index');
+
+		Route::get('create', 'MaterialsController@create');
+		Route::put('store', 'MaterialsController@store');
+
+		Route::get('view/{id}', 'MaterialsController@show');
+
+		Route::get('edit/{id}', 'MaterialsController@edit');
+		Route::put('update/{id}', 'MaterialsController@update');
+
+		Route::get('delete/{id}', 'MaterialsController@destroy');
 	});
 
 	//Routes for Profile Management
