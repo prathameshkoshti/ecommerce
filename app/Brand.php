@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Brand extends Model
 {
     protected $fillable = [
 		'name', 'created_by', 'updated_by',
@@ -19,4 +19,5 @@ class Category extends Model
 	{
 		return $this->belongsTo('App\User', 'updated_by');
 	}
+	
 }

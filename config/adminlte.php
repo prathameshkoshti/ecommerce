@@ -139,9 +139,14 @@ return [
 				   'text' => 'Products',
 				   'url'  => 'admin/products',
 				   'icon'    =>  'cube',
-			    ],
+				],
+				[
+					'text' => 'Brands',
+					'url' => 'admin/brands',
+					'icon' => 'certificate',
+				],
 			    [
-				   'text'    => 'Category',
+				   'text'    => 'Categories',
 				   'url'     => 'admin/categories',
 				   'icon'    =>  'reorder',
 			    ],

@@ -48,7 +48,7 @@ class MaterialsController extends Controller
 			'updted_by' => Auth::user()->id,
 		]);
 
-		\Session::flash('create', 'Material added successfully!');
+		\Session::flash('success', 'Material: '.$request->name.' added successfully!');
 		return redirect('/admin/materials');
     }
 
@@ -61,7 +61,13 @@ class MaterialsController extends Controller
     public function show($id)
     {
 		$material = Material::find($id);
-		return view('admin.materials.view', compact('material'));
+		if($material)
+			return view('admin.materials.view', compact('material'));
+		else
+		{
+			\Session::flash('danger', 'No material found having the id '.$id.'!');
+			return redirect('admin/materials');
+		}
     }
 
     /**
@@ -73,7 +79,13 @@ class MaterialsController extends Controller
     public function edit($id)
     {
 		$material = Material::find($id);
-		return view('admin.materials.edit', compact('material'));
+		if($material)
+			return view('admin.materials.edit', compact('material'));
+		else
+		{
+			\Session::flash('danger', 'No material found having the id '.$id.'!');
+			return redirect('admin/materials');
+		}
     }
 
     /**
@@ -85,18 +97,23 @@ class MaterialsController extends Controller
      */
     public function update(Request $request, $id)
     {
+		$material = Material::find($id);
+		if(!$material)
+		{
+			\Session::flash('danger', 'No material found having the id '.$id.'!');
+			return redirect('admin/materials');
+		}
+
 		$this->validate($request, [
 			'name' => 'required',
 		]);
-
-		$material = Material::find($id);
 
 		$material->name = $request->name;
 		$material->status = $request->status == 'on'? 1 : 0;
 		$material->updated_by = Auth::user()->id;
 
 		$material->save();
-		\Session::flash('update', 'Material updated succssfully!');
+		\Session::flash('success', 'Material: '.$request->name.' updated successfully!');
 
 		return redirect('admin/materials');
     }
@@ -110,14 +127,16 @@ class MaterialsController extends Controller
     public function destroy($id)
     {
 		$material = Material::find($id);
-
-		if($material)
+		if(!$material)
 		{
-			$material->status = 0;
-			$material->save();
-
-			\Session::flash('delete', 'Material deleted successfully!');
-			return redirect('/admin/materials');
+			\Session::flash('danger', 'No material found having the id '.$id.'!');
+			return redirect('admin/materials');
 		}
+
+		$material->status = 0;
+		$material->save();
+
+		\Session::flash('warning', 'Material: '.$material->name.' deleted successfully!');
+		return redirect('/admin/materials');
     }
 }

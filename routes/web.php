@@ -18,10 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/', 'HomeController@index')->name('home');
 //Admin Routes
 Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 
+	Route::get('/', 'HomeController@index')->name('home');
 	//Routes for User Management
 	Route::group(['prefix' => 'users'], function(){
 
@@ -66,6 +66,36 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::put('update/{id}', 'MaterialsController@update');
 
 		Route::get('delete/{id}', 'MaterialsController@destroy');
+	});
+
+	//Routes for products management
+	Route::group(['prefix' => 'products'], function(){
+		Route::get('/', 'ProductsController@index');
+
+		Route::get('create', 'ProductsController@create');
+		Route::put('store', 'ProductsController@store');
+
+		Route::get('view/{id}', 'ProductsController@show');
+
+		Route::get('edit/{id}', 'ProductsController@edit');
+		Route::put('update/{id}', 'ProductsController@update');
+
+		Route::get('delete/{id}', 'ProductsController@destroy');
+	});
+
+	//Routes for brands management
+	Route::group(['prefix' => 'brands'], function(){
+		Route::get('/', 'BrandsController@index');
+
+		Route::get('create', 'BrandsController@create');
+		Route::put('store', 'BrandsController@store');
+
+		Route::get('view/{id}', 'BrandsController@show');
+
+		Route::get('edit/{id}', 'BrandsController@edit');
+		Route::put('update/{id}', 'BrandsController@update');
+
+		Route::get('delete/{id}', 'BrandsController@destroy');
 	});
 
 	//Routes for Profile Management

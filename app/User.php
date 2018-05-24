@@ -39,11 +39,21 @@ class User extends Authenticatable
 
 	public function materialsCreatedBy()
 	{
-		return $this->hasMany('App\Materials', 'created_by', 'id');
+		return $this->hasMany('App\Material', 'created_by', 'id');
 	}
 
 	public function materialsUpdatedBy()
 	{
-		return $this->hasMany('App\Materials', 'updated_by', 'id');
+		return $this->hasMany('App\Material', 'updated_by', 'id');
+	}
+
+	public function brandsCreatedBy()
+	{
+		return $this->hasMany('App\Brand', 'created_by', 'id');
+	}
+
+	public function brandsUpdatedBy()
+	{
+		return $this->hasMany('App\Brand', 'updated_by', 'id');
 	}
 }

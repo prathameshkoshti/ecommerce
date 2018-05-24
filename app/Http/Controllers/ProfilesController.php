@@ -35,7 +35,7 @@ class ProfilesController extends Controller
 			$user->updated_by = Auth::user()->id;
 			$user->save();
 
-			\Session::flash('update', 'Profile Updated Successfully');
+			\Session::flash('success', 'Profile updated successfully');
 			return redirect('/admin/profile');
     	}
 
@@ -67,12 +67,12 @@ class ProfilesController extends Controller
 		{
 			Auth::user()->password = bcrypt($request->new_password);
 			Auth::user()->save();
-			\Session::flash('create', 'Password updated successfully!');
+			\Session::flash('success', 'Password updated successfully!');
 			return redirect('/admin/change_password');
 		}
 		else
 		{
-			\Session::flash('delete', 'Old Password incorrect!');
+			\Session::flash('danger', 'Old password incorrect!');
 			return redirect('/admin/change_password');
 		}
 	}

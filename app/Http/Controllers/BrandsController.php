@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use Auth;
 use Illuminate\Http\Request;
-
-class CategoriesController extends Controller
+use App\Brand;
+use Auth;
+class BrandsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-		$categories = Category::all();
-		return view('admin.categories.index', compact('categories'));
+		$brands = Brand::all();
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -26,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.brands.create');
     }
 
     /**
@@ -41,15 +40,15 @@ class CategoriesController extends Controller
 			'name' => 'required',
 		]);
 
-		Category::create([
+		Brand::create([
 			'name' => request('name'),
 			'status' => $request->status == 'on'? 1: 0,
 			'created_by' => Auth::user()->id,
 			'updated_by' => Auth::user()->id,
 		]);
 
-		\Session::flash('success', 'Category: '.$request->name.' added successfully!');
-		return redirect('/admin/categories');
+		\Session::flash('success', 'Brand: '.$request->name.' created successfully!');
+		return redirect('/admin/brands');
     }
 
     /**
@@ -60,13 +59,13 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-		$category = Category::find($id);
-		if($category)
-			return view('admin.categories.view', compact('category'));
+		$brand = Brand::find($id);
+		if($brand)
+			return view('admin.brands.view', compact('brand'));
 		else
 		{
-			\Session::flash('danger', 'No category found having the id '.$id.'!');
-			return redirect('admin/categories');
+			\Session::flash('danger', 'No brand found having the id '.$id.'!');
+			return redirect('admin/brands');
 		}
     }
 
@@ -78,13 +77,13 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-		$category = Category::find($id);
-		if($category)
-			return view('admin.categories.edit', compact('category'));
+		$brand = Brand::find($id);
+		if($brand)
+			return view('admin.brands.edit', compact('brand'));
 		else
 		{
-			\Session::flash('danger', 'No category found having the id '.$id.'!');
-			return redirect('admin/categories');
+			\Session::flash('danger', 'No brand found having the id '.$id.'!');
+			return redirect('admin/brands');
 		}
     }
 
@@ -97,25 +96,24 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-		$category = Category::find($id);
-		if(!$category)
+		$brand = Brand::find($id);
+		if(!$brand)
 		{
-			\Session::flash('danger', 'No category found having the id '.$id.'!');
-			return redirect('admin/categories');
+			\Session::flash('danger', 'No brand found having the id '.$id.'!');
+			return redirect('admin/brands');
 		}
 
-		$this->validate($request, [
+        $this->validate($request,[
 			'name' => 'required',
 		]);
 
-		$category->name = $request->name;
-		$category->status = $request->status == 'on'? 1 : 0;
-		$category->updated_by = Auth::user()->id;
+		$brand->name = $request->name;
+		$brand->status = $request->status == 'on' ? 1 : 0;
+		$brand->updated_by = Auth::user()->id;
+		$brand->save();
 
-		$category->save();
-		\Session::flash('success', 'Category: '.$request->name.' updated successfully!');
-
-		return redirect('admin/categories');
+		\Session::flash('success', 'Brand: '.$request->name.' updated successfully!');
+		return redirect('/admin/brands');
     }
 
     /**
@@ -126,17 +124,17 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-		$category = Category::find($id);
-		if(!$category)
+		$brand = Brand::find($id);
+		if(!$brand)
 		{
-			\Session::flash('danger', 'No category found having the id '.$id.'!');
-			return redirect('admin/categories');
+			\Session::flash('danger', 'No brand found having the id '.$id.'!');
+			return redirect('admin/brands');
 		}
 
-		$category->status = 0;
-		$category->save();
+		$brand->status = 0;
+		$brand->save();
 
-		\Session::flash('warning', 'Category: '.$category->name.' deleted successfully!');
-		return redirect('/admin/categories');
+		\Session::flash('warning', 'Brand: '.$brand->name.' deleted successfully!');
+		return redirect('admin/brands');
     }
 }

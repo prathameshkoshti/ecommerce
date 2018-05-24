@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-		$users = User::where('status', '=', 1)->get();
+		$users = User::all();
 		return view('admin.users.index', compact('users'));
     }
 
@@ -53,7 +53,7 @@ class UsersController extends Controller
 			'updated_by' => Auth::user()->id,
 		]);
 
-		\Session::flash('create', 'User Added into the System.');
+		\Session::flash('success', 'User: '.$request->name.' added successfully!');
 		return redirect('/admin/users');
     }
 
@@ -70,7 +70,7 @@ class UsersController extends Controller
 			return view('admin.users.view', compact('user'));
 		else
 		{
-			\Session::flash('delete', 'No user found with id '.$id.'!');
+			\Session::flash('danger', 'No user found having the id '.$id.'!');
 			return redirect('admin/users');
 		}
     }
@@ -88,7 +88,7 @@ class UsersController extends Controller
 			return view('admin.users.edit', compact('user'));
 		else
 		{
-			\Session::flash('delete', 'No user found with id '.$id.'!');
+			\Session::flash('danger', 'No user found having the id '.$id.'!');
 			return redirect('admin/users');
 		}
     }
@@ -105,7 +105,7 @@ class UsersController extends Controller
 		$user = User::find($id);
 		if(!$user)
 		{
-			\Session::flash('update', 'No user found with id '.$id.'!');
+			\Session::flash('danger', 'No user found having the id '.$id.'!');
 			return redirect('admin/users');
 		}
 
@@ -124,7 +124,7 @@ class UsersController extends Controller
 			$user->password = bcrypt(request('password'));
 
 		$user->save();
-		\Session::flash('update', 'User Info Updated Successfully!');
+		\Session::flash('success', 'User: '.$request->name.' updated successfully!');
 		return redirect('admin/users');
     }
 
@@ -139,13 +139,13 @@ class UsersController extends Controller
 		$user = User::find($id);
 		if(!$user)
 		{
-			\Session::flash('delete', 'No user found with id '.$id.'!');
+			\Session::flash('danger', 'No user found having the id '.$id.'!');
 			return redirect('admin/users');
 		}
 		$user->status = 0;
 		$user->save();
 
-		\Session::flash('delete', 'User Deleted Successfully!');
+		\Session::flash('warning', 'User: '.$user->name.' deleted successfully!');
 		return redirect('admin/users');
     }
 }
