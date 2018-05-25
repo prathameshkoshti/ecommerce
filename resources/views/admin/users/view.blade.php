@@ -3,10 +3,10 @@
 @section('title', 'Admin Panel :: View User')
 
 @section('content_header')
-     <center>
+    <center>
 		<h2>Viewing User</h2>
 		<br>
-     </center>
+    </center>
 @stop
 
 @section('content')

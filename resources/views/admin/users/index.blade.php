@@ -3,18 +3,18 @@
 @section('title', 'Admin Panel :: Users')
 
 @section('content_header')
-     <center>
+    <center>
 		<h2>Users</h2>
 		<br>
-     </center>
+    </center>
 @stop
 
 @section('content')
 <div class="container-fluid">
-     <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-               <table id="user" class="table table-borderless text-center">
-                    <thead>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <table id="user" class="table table-borderless text-center">
+                <thead>
 					<tr>
 						<th colspan="4">
 							<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
@@ -40,8 +40,8 @@
 							Actions
 						</th>
 					</tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
 					@foreach($users as $user)
 					<tr>
 						<td>
@@ -65,12 +65,12 @@
 							<a href="users/edit/{{$user->id}}"><i class="fa fa-pencil fa-lg"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="users/delete/{{$user->id}}"><i class="fa fa-trash fa-lg"></i></a>
 						</td>
-						@endforeach
 					</tr>
-                    </tbody>
-                  </table>
-          </div>
-     </div>
+					@endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 @stop
 
@@ -98,5 +98,5 @@
 			}
 		}
 	}
-	</script>
+</script>
 @stop

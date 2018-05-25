@@ -49,7 +49,7 @@
 	}
 
 	.btn-success:hover{
-		background-color: #4b3c84;
+		background-color: #59499e;
 	}
 
 	.table-borderless tbody+tbody,.table-borderless td,.table-borderless th,.table-borderless thead th{

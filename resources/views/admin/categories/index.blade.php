@@ -3,10 +3,10 @@
 @section('title', 'Admin Panel :: Categories')
 
 @section('content_header')
-     <center>
+    <center>
 		<h2>Categories</h2>
 		<br>
-     </center>
+    </center>
 @stop
 
 @section('content')

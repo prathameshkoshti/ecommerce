@@ -3,10 +3,10 @@
 @section('title', 'Admin Panel :: Brands')
 
 @section('content_header')
-     <center>
+    <center>
 		<h2>Brands</h2>
 		<br>
-     </center>
+    </center>
 @stop
 
 @section('content')

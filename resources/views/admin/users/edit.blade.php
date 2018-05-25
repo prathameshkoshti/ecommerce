@@ -3,10 +3,10 @@
 @section('title', 'Admin Panel :: Users')
 
 @section('content_header')
-     <center>
+    <center>
 		<h2>Create a User</h2>
 		<br>
-     </center>
+    </center>
 @stop
 
 @section('content')
