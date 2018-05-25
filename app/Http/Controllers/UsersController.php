@@ -143,6 +143,8 @@ class UsersController extends Controller
 			return redirect('admin/users');
 		}
 		$user->status = 0;
+		$user->updated_by = Auth::user()->id;
+
 		$user->save();
 
 		\Session::flash('warning', 'User: '.$user->name.' deleted successfully!');

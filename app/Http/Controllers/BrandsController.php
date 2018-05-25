@@ -132,6 +132,8 @@ class BrandsController extends Controller
 		}
 
 		$brand->status = 0;
+		$brand->updated_by = Auth::user()->id;
+
 		$brand->save();
 
 		\Session::flash('warning', 'Brand: '.$brand->name.' deleted successfully!');

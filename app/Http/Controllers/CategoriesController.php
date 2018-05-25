@@ -134,6 +134,8 @@ class CategoriesController extends Controller
 		}
 
 		$category->status = 0;
+		$category->updated_by = Auth::user()->id;
+
 		$category->save();
 
 		\Session::flash('warning', 'Category: '.$category->name.' deleted successfully!');

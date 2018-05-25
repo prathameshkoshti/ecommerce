@@ -134,6 +134,8 @@ class MaterialsController extends Controller
 		}
 
 		$material->status = 0;
+		$material->updated_by = Auth::user()->id;
+
 		$material->save();
 
 		\Session::flash('warning', 'Material: '.$material->name.' deleted successfully!');

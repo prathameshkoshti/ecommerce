@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Admin Panel :: Categories')
+@section('title', 'Admin Panel :: Materials')
 
 @section('content_header')
     <center>

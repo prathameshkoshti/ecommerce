@@ -4,7 +4,7 @@
 
 @section('content_header')
     <center>
-		<h2>Create a User</h2>
+		<h2>Editing User:{{$user->name}}</h2>
 		<br>
     </center>
 @stop

@@ -1,10 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Admin Panel :: View User')
+@section('title', 'Admin Panel :: Users')
 
 @section('content_header')
     <center>
-		<h2>Viewing User</h2>
+		<h2>Viewing User: {{$user->name}}</h2>
 		<br>
     </center>
 @stop
