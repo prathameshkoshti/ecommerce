@@ -39,6 +39,18 @@
 		color: #42A5F5;
 	}
 
+	.product-images:hover{
+		transform: scale(2);
+	}
+
+	.product-images{
+		transition: 0.5s ease-out;
+	}
+
+	.inr{
+		font-size: 1.2em;
+	}
+
 	.btn{
 		border: 0px !important;
 		width: 100px;

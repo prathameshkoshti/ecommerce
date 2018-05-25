@@ -19,4 +19,9 @@ class Material extends Model
 	{
 		return $this->belongsTo('App\User', 'updated_by');
 	}
+
+	public function product()
+	{
+		return $this->hasOne('App\Product');
+	}
 }
