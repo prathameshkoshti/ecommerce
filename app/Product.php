@@ -34,4 +34,9 @@ class Product extends Model
 	{
 		return $this->belongsTo('App\Brand');
 	}
+
+	public function cart()
+	{
+		return $this->hasOne('App\Cart');
+	}
 }

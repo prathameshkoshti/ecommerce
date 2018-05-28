@@ -121,6 +121,7 @@ return [
 				],
 				[
 					'text'  =>  'Cart',
+					'url' => 'admin/carts',
 					'icon'  =>  'shopping-cart',
 					'icon_color' => 'aqua',
 				],

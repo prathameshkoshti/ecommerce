@@ -98,6 +98,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::get('delete/{id}', 'BrandsController@destroy');
 	});
 
+	//Routes for cart management
+	Route::group(['prefix' => 'carts'], function(){
+		Route::get('/', 'CartsController@index');
+
+		Route::get('view/{id}', 'CartsController@show');
+
+		Route::get('delete/{id}', 'CartsController@destroy');
+	});
+
 	//Routes for Profile Management
     Route::get('profile', 'ProfilesController@show');
     Route::put('profile/update', 'ProfilesController@updateProfile');

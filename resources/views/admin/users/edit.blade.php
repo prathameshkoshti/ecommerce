@@ -60,6 +60,18 @@
 							</td>
 						</tr>
 						<tr>
+							<td>
+								Status:
+							</td>
+							<td>
+								@if($user->status == 1)
+									<input type="checkbox" name="status" checked>
+								@else
+									<input type="checkbox" name="status">
+								@endif
+							</td>
+						</tr>
+						<tr>
 							<td></td>
 							<td>
 								<input type="submit" class="btn btn-success" value="Submit">

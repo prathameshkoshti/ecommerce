@@ -119,6 +119,7 @@ class UsersController extends Controller
 		$user->email = request('email');
 		$user->mobile_no = request('mobile_no');
 		$user->updated_by = Auth::user()->id;
+		$user->status = $request->status == 'on' ? 1 : 0;
 
 		if(request('password'))
 			$user->password = bcrypt(request('password'));
