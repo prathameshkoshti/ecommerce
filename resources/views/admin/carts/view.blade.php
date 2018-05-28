@@ -32,7 +32,7 @@
 								<a href="/admin/products/view/{{$cart_item->product->id}}"><span class="product">{{$cart_item->product->name}}</span><br></a>
 								<em class="category">{{$cart_item->product->category->name}}</em>
 							</p>
-							Size: <span class="size">{{$cart_item->product->size}}</span><br>
+							Size: <span class="size">{{$cart_item->size}}</span><br>
 							Quantity: <span class="quantity">{{$cart_item->quantity}}</span>
 							Price: <span class="inr">&#8377 {{$cart_item->product->price * $cart_item->quantity}}</span>
 							<br>

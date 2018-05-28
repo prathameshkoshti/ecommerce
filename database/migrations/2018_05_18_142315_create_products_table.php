@@ -22,7 +22,8 @@ class CreateProductsTable extends Migration
             $table->string('image_names');
             $table->string('original_image_names');
             $table->string('image_mime');
-            $table->text('description');
+			$table->text('description');
+			$table->string('size');
             $table->float('price', 8, 2);
             $table->integer('quantity');
             $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);

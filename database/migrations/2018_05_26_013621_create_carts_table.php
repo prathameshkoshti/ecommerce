@@ -18,6 +18,7 @@ class CreateCartsTable extends Migration
             $table->integer('product_id');
             $table->integer('user_id');
             $table->integer('quantity');
+			$table->string('size');
             $table->tinyInteger('status')->comment('0 => Removed, 1 => Added');
             $table->timestamp('created_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('created_by');
