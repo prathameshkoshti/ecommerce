@@ -111,5 +111,5 @@
 @stop
 
 @section('css')
-@include('layouts.cards')
+@include('layouts.cart_cards')
 @stop

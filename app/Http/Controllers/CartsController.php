@@ -37,7 +37,7 @@ class CartsController extends Controller
 			return view('admin.carts.view', compact('cart', 'user'));
 		else
 		{
-			\Session::flash('danger', 'No cart ound having the id: '.$id);
+			\Session::flash('danger', 'No cart found for user: '.$user->name);
 			return redirect('/admin/carts');
 		}
     }
@@ -53,7 +53,7 @@ class CartsController extends Controller
         $cart = Cart::find($id);
 		if(!$cart)
 		{
-			\Session::flash('danger', 'No cart ound having the id: '.$id);
+			\Session::flash('danger', 'No cart found having the id: '.$id);
 			return redirect('/admin/carts');
 		}
 
@@ -62,7 +62,7 @@ class CartsController extends Controller
 
 		$cart->save();
 
-		\Session('warning', 'Product: '.$cart->product->name.' from '.$cart->user->name.'\'s cart deleted successfully');
+		\Session('warning', 'Product: '.$cart->product->name.' from '.$cart->user->name.'\'s cart deleted successfully!');
 		return redirect('/admin/carts/view/'.$cart->user_id);
     }
 }

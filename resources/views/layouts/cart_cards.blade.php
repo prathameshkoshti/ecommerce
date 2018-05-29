@@ -46,6 +46,10 @@
 		text-align: right
 	}
 
+	.card-container:nth-child(2){
+		float: right;
+	}
+
 	.table-borderless tbody+tbody,.table-borderless td,.table-borderless th,.table-borderless thead th{
 		border:0 !important;
 	}
