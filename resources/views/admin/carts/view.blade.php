@@ -22,10 +22,10 @@
 				<div class="col-md-12 card-container">
 					<div class="row">
 						<div class="card-image col-md-4">
-								@php
-								$images = explode(',', $cart_item->product->image_names);
+							@php
+							$images = explode(',', $cart_item->product->image_names);
 							@endphp
-							<img class= width="150px" height="150px" src="{{url('storage/'.$cart_item->product->category->name.'/'.$images[0])}}" alt="">
+							<img class= width="150px" height="150px" src="{{url('storage/'.$cart_item->product->category->name.'/'.$images[0])}}" alt="{{$cart_item->product->name}}">
 						</div>
 						<div class="col-md-6 col-md-offset-1 card-info">
 							<p>
@@ -38,9 +38,7 @@
 							<br>
 							<br>
 							<div class="delete-item">
-								<button class="btn btn-danger" onclick="location.href='/admin/carts/delete/{{$cart_item->id}}'">
-									<i class="fa fa-trash fa"></i> Delete
-								</button>
+									<button onclick="location.href='/admin/carts/delete/{{$cart_item->id}}'" class="btn btn-danger"><i class="fa fa-lg fa-trash-o"></i> Remove</button>
 							</div>
 						</div>
 					</div>
@@ -81,12 +79,12 @@
 					</td>
 					<td>
 						@php
-							if($cart_total >= 499)
+							if($cart_total >= 499 || $cart_total <= 0)
 								$delivery_charges = 0;
 							else
 								$delivery_charges = 100;
 						@endphp
-						&#8377 {{$delivery_charges == 0 ? 'Free' : $delivery_charges}}
+						&#8377 {{$delivery_charges == 0 ? $cart_total == 0 ? '0' : 'Free' : $delivery_charges}}
 					</td>
 				</tr>
 			</table>
@@ -112,4 +110,5 @@
 
 @section('css')
 @include('layouts.cart_cards')
+@include('layouts.resources')
 @stop

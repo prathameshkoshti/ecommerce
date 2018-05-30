@@ -107,6 +107,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::get('delete/{id}', 'CartsController@destroy');
 	});
 
+	//Routes for wishlist management
+	Route::group(['prefix' => 'wishlists'], function(){
+		Route::get('/', 'WishlistsController@index');
+
+		Route::get('view/{id}', 'WishlistsController@show');
+
+		Route::get('delete/{id}', 'WishlistsController@destroy');
+	});
+
 	//Routes for Profile Management
     Route::get('profile', 'ProfilesController@show');
     Route::put('profile/update', 'ProfilesController@updateProfile');

@@ -128,6 +128,7 @@ return [
 				[
 					'text'  =>  'Wishlist',
 					'icon'  =>  'heart',
+					'url' => 'admin/wishlists',
 					'icon_color' => 'red',
 				],
           	],

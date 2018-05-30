@@ -39,4 +39,9 @@ class Product extends Model
 	{
 		return $this->hasOne('App\Cart');
 	}
+
+	public function wishlist()
+	{
+		return $thsi->hasOne('App\Wishlist');
+	}
 }

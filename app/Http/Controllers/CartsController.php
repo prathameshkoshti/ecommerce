@@ -59,10 +59,9 @@ class CartsController extends Controller
 
 		$cart->status = 0;
 		$cart->updated_by = Auth::user()->id;
-
 		$cart->save();
 
-		\Session('warning', 'Product: '.$cart->product->name.' from '.$cart->user->name.'\'s cart deleted successfully!');
+		\Session::flash('warning', 'Product: '.$cart->product->name.' from '.$cart->user->name.'\'s cart deleted successfully!');
 		return redirect('/admin/carts/view/'.$cart->user_id);
     }
 }
