@@ -75,23 +75,23 @@
 @stop
 
 @section('js')
-<script>
-	function searchKeyword() {
-		var input, filter, table, tr, td1, i;
-		input = document.getElementById("searchField");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("categories");
-		tr = table.getElementsByTagName("tr");
-		for (i = 0; i < tr.length; i++) {
-			td1 = tr[i].getElementsByTagName("td")[1];
-			if (td1) {
-				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
+	<script>
+		function searchKeyword() {
+			var input, filter, table, tr, td1, i;
+			input = document.getElementById("searchField");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("categories");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td1 = tr[i].getElementsByTagName("td")[1];
+				if (td1) {
+					if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
 				}
 			}
 		}
-	}
 	</script>
 @stop
