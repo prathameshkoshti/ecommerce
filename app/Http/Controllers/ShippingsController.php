@@ -77,20 +77,16 @@ class ShippingsController extends Controller
     {
 		$shipping = Shipping::find($id);
 
-		if($shipping)
-		{
-			$other_addresses = Shipping::where([
-				['user_id', '=', $shipping->user->id],
-				['id', '!=', $id],
-				])->get();
-			return view('admin.shippings.view', compact('shipping', 'other_addresses'));
-		}
-			//dd($shippings);
-		else
+		if(!$shipping)
 		{
 			\Session::flash('danger', 'No shipping address found having the id: '.$id);
 			return redirect('/admin/shippings');
 		}
+		$other_addresses = Shipping::where([
+			['user_id', '=', $shipping->user->id],
+			['id', '!=', $id],
+			])->get();
+		return view('admin.shippings.view', compact('shipping', 'other_addresses'));
 	}
 
 	/**
@@ -173,7 +169,9 @@ class ShippingsController extends Controller
 		}
 
 		$shipping->status = 0;
+		$shipping->updated_by = Auth::user()->id;
 		$shipping->save();
+		
 		\Session::flash('warning', 'Shipping address for user:'.$shipping->user->name.' deleted successfully!');
 		return redirect('/admin/shippings');
     }

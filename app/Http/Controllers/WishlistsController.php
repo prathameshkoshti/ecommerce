@@ -33,6 +33,7 @@ class WishlistsController extends Controller
 			['status', 1]
 		])->get();
 		$user = User::find($id);
+		
 		if($wishlist)
 			return view('admin.wishlists.view', compact('wishlist', 'user'));
 		else
