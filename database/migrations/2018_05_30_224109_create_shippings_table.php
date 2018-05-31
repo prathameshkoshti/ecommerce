@@ -21,11 +21,11 @@ class CreateShippingsTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
-            $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active');
+            $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);
             $table->timestamp('created_at')->nullable();
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
         });
     }
 

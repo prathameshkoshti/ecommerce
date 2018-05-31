@@ -17,11 +17,11 @@ class CreateWishlistsTable extends Migration
 			$table->increments('id');
 			$table->integer('product_id');
 			$table->integer('user_id');
-			$table->tinyInteger('status')->comment('0 => Removed, 1 => Added');
+			$table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);
             $table->timestamp('created_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamp('updated_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
         });
     }
 

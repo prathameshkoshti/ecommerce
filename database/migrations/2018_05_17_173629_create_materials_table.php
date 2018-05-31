@@ -16,11 +16,11 @@ class CreateMaterialsTable extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active');
+            $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);
             $table->timestamp('created_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamp('updated_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
         });
     }
 

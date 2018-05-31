@@ -16,11 +16,11 @@ class CreateBrandsTable extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);
             $table->timestamp('created_at')->nullable();
-            $table->integer('created_by');
+            $table->integer('created_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
         });
     }
 
