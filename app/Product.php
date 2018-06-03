@@ -44,4 +44,9 @@ class Product extends Model
 	{
 		return $thsi->hasOne('App\Wishlist');
 	}
+
+	public function order()
+	{
+		return $this->hasMany('App\Order');
+	}
 }

@@ -116,6 +116,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::get('delete/{id}', 'WishlistsController@destroy');
 	});
 
+	//Routes for orders management
+	Route::group(['prefix' => 'orders'], function(){
+		Route::get('/', 'OrdersController@index');
+
+		Route::get('edit/{id}', 'OrdersController@edit');
+		Route::put('update/{id}', 'OrdersController@update');
+
+		Route::get('view/{id}', 'OrdersController@show');
+
+		Route::get('delete/{id}', 'OrdersController@destroy');
+	});
+
 	//Routes for shipping_address management
 	Route::group(['prefix' => 'shippings'], function(){
 		Route::get('/', 'ShippingsController@index');
