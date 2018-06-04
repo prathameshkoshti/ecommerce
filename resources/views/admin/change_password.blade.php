@@ -23,7 +23,7 @@
 							</tr>
 							<tr>
 								<td>
-									<input type="submit" value="Change Password" class="btn btn-success form-control">
+									<input type="submit" value="Change Password" class="btn btn-success chng-pass form-control">
 								</td>
 							</tr>
 						</table>

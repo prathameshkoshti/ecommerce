@@ -50,7 +50,7 @@
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value="Update Profile" class="btn btn-success">
+									<input type="submit" value="Update Profile" class="btn btn-success update-profile">
 								</td>
 							</tr>
 						</table>

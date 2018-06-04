@@ -64,6 +64,14 @@
 		background-color: #59499e;
 	}
 
+	.chng-pass{
+		width: 10em;
+	}
+
+	.update-profile{
+		width: 8em;
+	}
+
 	.table-borderless tbody+tbody,.table-borderless td,.table-borderless th,.table-borderless thead th{
 		border:0 !important;
 	}
