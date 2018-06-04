@@ -37,6 +37,16 @@ class User extends Authenticatable
 		return $this->hasMany('App\Category', 'updated_by', 'id');
 	}
 
+	public function cartsCreatedBy()
+	{
+		return $this->hasMany('App\Cart', 'created_by', 'id');
+	}
+
+	public function cartsUpdatedBy()
+	{
+		return $this->hasMany('App\Cart', 'updated_by', 'id');
+	}
+
 	public function materialsCreatedBy()
 	{
 		return $this->hasMany('App\Material', 'created_by', 'id');
@@ -47,9 +57,39 @@ class User extends Authenticatable
 		return $this->hasMany('App\Material', 'updated_by', 'id');
 	}
 
+	public function ordersCreatedBy()
+	{
+		return $this->hasMany('App\Order', 'created_by', 'id');
+	}
+
+	public function ordersUpdatedBy()
+	{
+		return $this->hasMany('App\Order', 'updated_by', 'id');
+	}
+
+	public function shippingsCreatedBy()
+	{
+		return $this->hasMany('App\Shipping', 'created_by', 'id');
+	}
+
+	public function shippingsUpdatedBy()
+	{
+		return $this->hasMany('App\Shipping', 'updated_by', 'id');
+	}
+
 	public function brandsCreatedBy()
 	{
 		return $this->hasMany('App\Brand', 'created_by', 'id');
+	}
+
+	public function wishlistsUpdatedBy()
+	{
+		return $this->hasMany('App\Wishlist', 'updated_by', 'id');
+	}
+
+	public function wishlistsCreatedBy()
+	{
+		return $this->hasMany('App\Wishlist', 'created_by', 'id');
 	}
 
 	public function brandsUpdatedBy()

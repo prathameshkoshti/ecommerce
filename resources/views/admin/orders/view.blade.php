@@ -123,9 +123,9 @@
 						Additional Information:
 					</td>
 					<td>
-						Created By: {{$order->created_by}}<br>
+						Created By: {{$order->createdBy->name}}<br>
 						Created At: {{$order->created_at}}<br>
-						Updated By: {{$order->updated_by}}<br>
+						Updated By: {{$order->updatedBy->name}}<br>
 						Updated By: {{$order->updated_at}}
 					</td>
 				</tr>
