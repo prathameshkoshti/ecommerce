@@ -109,6 +109,6 @@
 @stop
 
 @section('css')
-@include('layouts.cart_cards')
-@include('layouts.resources')
+@include('admin.layouts.cart_cards')
+@include('admin.layouts.resources')
 @stop

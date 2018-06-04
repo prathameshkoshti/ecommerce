@@ -68,7 +68,7 @@
 
 
 @section('css')
-@include('layouts.cart_cards')
+@include('admin.layouts.cart_cards')
 @stop
 
 @section('js')

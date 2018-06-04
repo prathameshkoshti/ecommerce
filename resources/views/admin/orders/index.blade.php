@@ -97,7 +97,7 @@
 @stop
 
 @section('css')
-@include('layouts.resources')
+@include('admin.layouts.resources')
 @stop
 
 @section('js')

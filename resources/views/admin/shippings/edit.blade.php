@@ -95,5 +95,5 @@
 			</div>
 		</div>
 	</div>
-@include('layouts.resources')
+@include('admin.layouts.resources')
 @stop

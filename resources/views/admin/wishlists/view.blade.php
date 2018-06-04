@@ -43,6 +43,6 @@
 @stop
 
 @section('css')
-@include('layouts.resources')
-@include('layouts.wishlist_cards')
+@include('admin.layouts.resources')
+@include('admin.layouts.wishlist_cards')
 @stop
