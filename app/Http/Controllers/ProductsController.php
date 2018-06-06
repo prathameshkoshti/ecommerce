@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Material;
 use App\Category;
-use App\Brand;
 use Auth;
 use Storage;
 use File;
@@ -33,8 +32,7 @@ class ProductsController extends Controller
     {
 		$categories = Category::where('status', '=', 1)->get();
 		$materials = Material::where('status', '=', 1)->get();
-		$brands = Brand::where('status', '=', 1)->get();
-        return view('admin.products.create', compact('materials', 'categories', 'brands'));
+        return view('admin.products.create', compact('materials', 'categories'));
     }
 
     /**
@@ -49,7 +47,6 @@ class ProductsController extends Controller
 			'name' => 'required',
 			'category' => 'required',
 			'material' => 'required',
-			'brand' => 'required',
 			'description' => 'required',
 			'price' => 'required|numeric',
 			'quantity' => 'required|max:100|min:1',
@@ -61,7 +58,6 @@ class ProductsController extends Controller
 		$product->name = $request->name;
 		$product->category_id = $request->category;
 		$product->material_id = $request->material;
-		$product->brand_id = $request->brand;
 		$product->description = $request->description;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
@@ -141,9 +137,8 @@ class ProductsController extends Controller
 
 		$categories = Category::where('status', '=', 1)->get();
 		$materials = Material::where('status', '=', 1)->get();
-		$brands = Brand::where('status', '=', 1)->get();
 
-		return view('admin.products.edit', compact('product', 'categories', 'brands', 'materials', 'images', 'original_image_names'));
+		return view('admin.products.edit', compact('product', 'categories', 'materials', 'images', 'original_image_names'));
     }
 
     /**
@@ -167,7 +162,6 @@ class ProductsController extends Controller
 			'name' => 'required',
 			'category' => 'required',
 			'material' => 'required',
-			'brand' => 'required',
 			'description' => 'required',
 			'price' => 'required|numeric',
 			'quantity' => 'required|max:100|min:1',
@@ -176,7 +170,6 @@ class ProductsController extends Controller
 		$product->name = $request->name;
 		$product->category_id = $request->category;
 		$product->material_id = $request->material;
-		$product->brand_id = $request->brand;
 		$product->description = $request->description;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;

@@ -24,14 +24,6 @@
 					</tr>
 					<tr>
 						<td>
-							Brand
-						</td>
-						<td>
-							{{$product->brand->name}}
-						</td>
-					</tr>
-					<tr>
-						<td>
 							Category
 						</td>
 						<td>

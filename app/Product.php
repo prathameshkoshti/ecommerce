@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-		'category_id', 'material_id', 'brand_id', 'name', 'price', 'description', 'quantity', 'image_names', 'original_image_names', 'iamge_mimes',
+		'category_id', 'material_id', 'name', 'price', 'description', 'quantity', 'image_names', 'original_image_names', 'iamge_mimes',
 	];
 
 	public function createdBy()
@@ -28,11 +28,6 @@ class Product extends Model
 	public function material()
 	{
 		return $this->belongsTo('App\Material');
-	}
-
-	public function brand()
-	{
-		return $this->belongsTo('App\Brand');
 	}
 
 	public function cart()

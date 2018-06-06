@@ -146,14 +146,8 @@ return [
 			    [
 				   'text' => 'Products',
 				   'url'  => 'admin/products',
-				   'icon'    =>  'cube',
+				   'icon'    =>  'barcode',
 				   'icon_color' => 'yellow',
-				],
-				[
-					'text' => 'Brands',
-					'url' => 'admin/brands',
-					'icon' => 'certificate',
-					'icon_color' => 'red',
 				],
 			    [
 				   'text'    => 'Categories',

@@ -77,11 +77,6 @@ class User extends Authenticatable
 		return $this->hasMany('App\Shipping', 'updated_by', 'id');
 	}
 
-	public function brandsCreatedBy()
-	{
-		return $this->hasMany('App\Brand', 'created_by', 'id');
-	}
-
 	public function wishlistsUpdatedBy()
 	{
 		return $this->hasMany('App\Wishlist', 'updated_by', 'id');
@@ -90,11 +85,6 @@ class User extends Authenticatable
 	public function wishlistsCreatedBy()
 	{
 		return $this->hasMany('App\Wishlist', 'created_by', 'id');
-	}
-
-	public function brandsUpdatedBy()
-	{
-		return $this->hasMany('App\Brand', 'updated_by', 'id');
 	}
 
 	public function productsCreatedBy()

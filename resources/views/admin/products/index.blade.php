@@ -16,7 +16,7 @@
                <table id="products" class="table table-borderless text-center">
                     <thead>
 					<tr>
-						<th colspan="6">
+						<th colspan="5">
 							<div class="search-wrapper">
 								<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 							</div>
@@ -31,9 +31,6 @@
 						</th>
 						<th>
 							Name
-						</th>
-						<th>
-							Brand
 						</th>
 						<th>
 							Category
@@ -57,9 +54,6 @@
 						</td>
 						<td>
 							{{$product->name}}
-						</td>
-						<td>
-							{{$product->brand->name}}
 						</td>
 						</td>
 						<td>

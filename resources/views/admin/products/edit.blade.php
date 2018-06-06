@@ -51,19 +51,6 @@
 					</tr>
 					<tr>
 						<td>
-							Brand
-						</td>
-						<td>
-							<select class="form-control" name="brand" required>
-									<option selected disabled>Select one</option>
-								@foreach($brands as $brand)
-									<option value="{{$brand->id}}"  {{$product->brand_id == $brand->id ? 'selected' : '' }}>{{$brand->name}}</option>
-								@endforeach
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
 							Description
 						</td>
 						<td>
