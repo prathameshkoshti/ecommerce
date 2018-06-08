@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+		if(Auth::user())
+			$this->middleware('auth');
     }
 
     /**
@@ -24,9 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-		if(Auth::user()->isAdmin == 1)
-			return view('admin.home');
+		$profile = Auth::user();
+		if($profile)
+			if($profile->isAdmin == 1)
+				return view('admin.home');
+			else
+				return view('users.home');
 		else
 			return view('users.home');
-    }
+	}
 }

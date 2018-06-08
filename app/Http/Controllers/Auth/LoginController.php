@@ -32,7 +32,7 @@ class LoginController extends Controller
         if($user->isAdmin == 1)
             return redirect()->intended('/admin');
         elseif($user->isAdmin == 0)
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
     }
     /**
      * Create a new controller instance.

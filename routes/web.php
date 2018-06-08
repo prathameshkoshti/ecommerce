@@ -80,21 +80,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::get('delete/{id}', 'ProductsController@destroy');
 	});
 
-	//Routes for brands management
-	Route::group(['prefix' => 'brands'], function(){
-		Route::get('/', 'BrandsController@index');
-
-		Route::get('create', 'BrandsController@create');
-		Route::put('store', 'BrandsController@store');
-
-		Route::get('view/{id}', 'BrandsController@show');
-
-		Route::get('edit/{id}', 'BrandsController@edit');
-		Route::put('update/{id}', 'BrandsController@update');
-
-		Route::get('delete/{id}', 'BrandsController@destroy');
-	});
-
 	//Routes for cart management
 	Route::group(['prefix' => 'carts'], function(){
 		Route::get('/', 'CartsController@index');
@@ -148,4 +133,46 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
     Route::put('update_password', 'ProfilesController@updatePassword');
 });
 
-Route::view('home', 'users.home');
+Route::get('product/{product_id}', 'UserController@getProduct');
+
+Route::get('category/{category_id}', 'UserController@getCategory');
+
+Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
+
+	Route::group(['prefix' => 'shipping_addresses'], function(){
+		Route::get('/', 'UserController@getShippings');
+
+		Route::get('create', 'UserController@createShippings');
+		Route::put('store', 'UserController@storeShippings');
+
+		Route::get('edit/{id}', 'UserController@editShippings');
+		Route::put('update/{id}', 'UserController@updateShippings');
+
+		Route::get('delete/{id}', 'UserController@deleteShippings');
+	});
+
+	Route::get('orders', 'UserController@getOrders');
+
+	Route::group(['prefix' => 'cart'], function(){
+		Route::get('/', 'UserController@getCart');
+
+		Route::get('addItem/{product_id}', 'UserController@addToCart');
+
+		Route::get('delete/{product_id}', 'UserController@deleteFromCart');
+	});
+
+	Route::group(['prefix' => 'wishlist'], function(){
+		Route::get('/', 'UserController@getWishlist');
+
+		Route::get('addItem/{product_id}', 'UserController@addToCart');
+
+		Route::get('delete/{product_id}', 'UserController@deleteFromWishlist');
+	});
+
+	Route::group(['prefix' => 'profile'], function(){
+		Route::get('/', 'UserController@getProfile');
+
+		Route::get('edit', 'UserController@editProfile');
+		Route::put('update', 'UserController@updateProfile');
+	});
+});

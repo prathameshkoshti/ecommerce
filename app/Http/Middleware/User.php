@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
+use Auth;
 
-class CheckAdmin
+class User
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,10 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()){
+		if(!Auth::user()){
 			return redirect('login');
 		}
-		if($request->user()->isAdmin != 1){
-			return redirect('401');
-		}
-		return $next($request);
+
+        return $next($request);
     }
 }
