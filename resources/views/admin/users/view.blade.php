@@ -64,9 +64,9 @@
 						</td>
 						<td>
 							Created At: {{$user->created_at}}<br>
-							Created By: {{$user->created_by}}<br>
+							Created By: {{$user->createdBy->name}}<br>
 							Updated At: {{$user->updated_at}}<br>
-							Updated By: {{$user->updated_by == '' ? 'NULL' : $user->updated_by}}
+							Updated By: {{$user->updatedBy->name}}
 						</td>
 					</tr>
 					<tr>

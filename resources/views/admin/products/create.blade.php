@@ -67,15 +67,6 @@
 					</tr>
 					<tr>
 						<td>
-							Quantity
-						</td>
-						<td>
-							<input type="range" class="slider" name="quantity" id="quantityRange" value="10" min="0" max="100" oninput="quantityOutput.value = quantityRange.value">
-							<output name="quantityOutputName" id="quantityOutput">10</output>
-						</td>
-					</tr>
-					<tr>
-						<td>
 							Upload Images
 						</td>
 						<td>

@@ -63,20 +63,11 @@
 						</td>
 						<td>
 							<div class="col-md-1">
-								<i class="inr">&#8377</i>
+								<i class="inr">$</i>
 							</div>
 							<div class="col-md-11">
 								<input type="number" value="{{$product->price}}" name="price" step="any" class="form-control" required>
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Quantity
-						</td>
-						<td>
-							<input type="range" class="slider" name="quantity" id="quantityRange" value="{{$product->quantity}}" min="0" max="100" oninput="quantityOutput.value = quantityRange.value">
-							<output name="quantityOutputName" id="quantityOutput">{{$product->quantity}}</output>
 						</td>
 					</tr>
 					<tr>

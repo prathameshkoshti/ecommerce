@@ -51,15 +51,7 @@
 							Price
 						</td>
 						<td>
-							<i class="inr">&#8377</i> {{$product->price}}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Quantity
-						</td>
-						<td>
-							{{$product->quantity}}
+							<i class="inr">$</i> {{$product->price}}
 						</td>
 					</tr>
 					<tr>
@@ -90,9 +82,9 @@
 						</td>
 						<td>
 							Created At: {{$product->created_at}}<br>
-							Created By: {{$product->created_by}}<br>
+							Created By: {{$product->createdBy->name}}<br>
 							Updated At: {{$product->updated_at}}<br>
-							Updated By: {{$product->updated_by == '' ? 'NULL' : $product->updated_by}}
+							Updated By: {{$product->updatedBy->name}}
 						</td>
 					</tr>
 				</table>

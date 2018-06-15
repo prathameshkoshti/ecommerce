@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-		'category_id', 'material_id', 'name', 'price', 'description', 'quantity', 'image_names', 'original_image_names', 'iamge_mimes',
+		'category_id', 'material_id', 'name', 'price', 'description', 'image_names', 'original_image_names', 'iamge_mimes',
 	];
 
 	public function createdBy()
@@ -43,5 +43,15 @@ class Product extends Model
 	public function order()
 	{
 		return $this->hasMany('App\Order');
+	}
+
+	public function quantity()
+	{
+		return $this->hasMany('App\Quantity');
+	}
+
+	public function size()
+	{
+		return $this->hasMany('App\Size');
 	}
 }

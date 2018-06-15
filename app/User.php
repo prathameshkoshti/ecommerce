@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile_no', 'updated_by', 'created_by'
+        'name', 'email', 'password', 'updated_by', 'created_by'
     ];
 
     /**
@@ -95,6 +95,26 @@ class User extends Authenticatable
 	public function productsUpdatedBy()
 	{
 		return $this->hasMany('App\Product', 'updated_by', 'id');
+	}
+
+	public function sizeCreatedBy()
+	{
+		return $this->hasMany('App\Size', 'created_by', 'id');
+	}
+
+	public function sizeUpdatedBy()
+	{
+		return $this->hasMany('App\Size', 'updated_by', 'id');
+	}
+
+	public function quantityCreatedBy()
+	{
+		return $this->hasMany('App\Quantity', 'created_by', 'id');
+	}
+
+	public function quantityUpdatedBy()
+	{
+		return $this->hasMany('App\Quantity', 'updated_by', 'id');
 	}
 
 	public function cart()

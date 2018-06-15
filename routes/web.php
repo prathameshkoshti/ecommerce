@@ -80,6 +80,45 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 		Route::get('delete/{id}', 'ProductsController@destroy');
 	});
 
+	//Routes for shoe sizes management
+	Route::group(['prefix' => 'sizes'], function(){
+		Route::get('/', 'SizesController@index');
+
+		Route::get('create', 'SizesController@create');
+		Route::put('store', 'SizesController@store');
+
+		Route::get('view/{id}', 'SizesController@show');
+
+		Route::get('edit/{id}', 'SizesController@edit');
+		Route::put('update/{id}', 'SizesController@update');
+
+		Route::get('delete/{id}', 'SizesController@destroy');
+	});
+
+	//Routes for shoe quantity management
+	Route::group(['prefix' => 'quantities'], function(){
+		Route::get('/', 'QuantitiesController@index');
+
+		Route::get('create', 'QuantitiesController@create');
+		Route::put('store', 'QuantitiesController@store');
+
+		Route::get('view/{id}', 'QuantitiesController@show');
+
+		Route::get('edit/{id}', 'QuantitiesController@edit');
+		Route::put('update/{id}', 'QuantitiesController@update');
+
+		Route::get('delete/{id}', 'QuantitiesController@destroy');
+	});
+
+	//Routes for product ratings management
+	Route::group(['prefix' => 'ratings'], function(){
+		Route::get('/', 'RatingsController@index');
+
+		Route::get('view/{id}', 'RatingsController@show');
+
+		Route::get('delete/{id}', 'RatingsController@destroy');
+	});
+
 	//Routes for cart management
 	Route::group(['prefix' => 'carts'], function(){
 		Route::get('/', 'CartsController@index');
@@ -136,6 +175,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 Route::get('product/{product_id}', 'UserController@getProduct');
 
 Route::get('category/{category_id}', 'UserController@getCategory');
+
+Route::get('search/{search_query}', 'UserController@search');
 
 Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 

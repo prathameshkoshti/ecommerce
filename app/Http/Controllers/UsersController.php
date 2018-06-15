@@ -122,8 +122,12 @@ class UsersController extends Controller
 		$user->status = $request->status == 'on' ? 1 : 0;
 
 		if(request('password'))
+		{
+			$this->validate($request, [
+				'password' => 'required|min:5|max|100',
+			]);
 			$user->password = bcrypt(request('password'));
-
+		}
 		$user->save();
 		\Session::flash('success', 'User: '.$request->name.' updated successfully!');
 		return redirect('admin/users');
