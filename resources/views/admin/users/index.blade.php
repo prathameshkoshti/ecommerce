@@ -17,7 +17,7 @@
                 <thead>
 					<tr>
 						<th colspan="4">
-							<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
+							<input placeholder="Search for Name, Email or Status" class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 						</th>
 						<th>
 							<button class="btn btn-primary" onclick="location.href='users/create'"><i class="fa fa-plus"></i><b> Create</b></button>
@@ -81,16 +81,19 @@
 @section('js')
 <script>
 	function searchKeyword() {
-		var input, filter, table, tr, td1, td3,i;
+		var input, filter, table, tr, td1, td2, td3,i;
 		input = document.getElementById("searchField");
 		filter = input.value.toUpperCase();
 		table = document.getElementById("user");
 		tr = table.getElementsByTagName("tr");
 		for (i = 0; i < tr.length; i++) {
 			td1 = tr[i].getElementsByTagName("td")[1];
-			td3 = tr[i].getElementsByTagName("td")[2];
-			if (td1 || td3) {
-				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 || td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
+			td2 = tr[i].getElementsByTagName("td")[2];
+			td3 = tr[i].getElementsByTagName("td")[3];
+			if (td1 || td2 || td3) {
+				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td2.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td3.innerHTML.toUpperCase().indexOf(filter) > -1) {
 					tr[i].style.display = "";
 				} else {
 					tr[i].style.display = "none";

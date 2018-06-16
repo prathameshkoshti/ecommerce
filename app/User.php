@@ -27,6 +27,28 @@ class User extends Authenticatable
         'password', 'remember_token',
 	];
 
+	/* #region */
+	public function userCreatedBy()
+	{
+		return $this->hasMany('App\User', 'created_by', 'id');
+	}
+
+	public function userUpdatedBy()
+	{
+		return $this->hasMany('App\User', 'updated_by', 'id');
+	}
+
+	public function createdBy()
+	{
+		return $this->belongsTo('App\User', 'created_by');
+	}
+
+	public function updatedBy()
+	{
+		return $this->belongsTo('App\User', 'updated_by');
+	}
+	/* #endregion */
+
 	public function categoriesCreatedBy()
 	{
 		return $this->hasMany('App\Category', 'created_by', 'id');
@@ -105,6 +127,16 @@ class User extends Authenticatable
 	public function sizeUpdatedBy()
 	{
 		return $this->hasMany('App\Size', 'updated_by', 'id');
+	}
+
+	public function ratingCreatedBy()
+	{
+		return $this->hasMany('App\Rating', 'created_by', 'id');
+	}
+
+	public function ratingUpdatedBy()
+	{
+		return $this->hasMany('App\Rating', 'updated_by', 'id');
 	}
 
 	public function quantityCreatedBy()

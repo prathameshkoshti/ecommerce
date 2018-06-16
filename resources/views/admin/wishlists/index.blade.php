@@ -18,7 +18,7 @@
 						<tr>
 							<th colspan="5">
 								<div class="search-wrapper">
-									<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
+									<input placeholder="Search for Name or Status" class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 								</div>
 							</th>
 						</tr>
@@ -85,15 +85,17 @@
 @section('js')
 <script>
 	function searchKeyword() {
-		var input, filter, table, tr, td1, i;
+		var input, filter, table, tr, td1, td2, i;
 		input = document.getElementById("searchField");
 		filter = input.value.toUpperCase();
 		table = document.getElementById("user-wishlist");
 		tr = table.getElementsByTagName("tr");
 		for (i = 0; i < tr.length; i++) {
 			td1 = tr[i].getElementsByTagName("td")[1];
-			if (td1) {
-				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1) {
+			td2 = tr[i].getElementsByTagName("td")[3];
+			if (td1 || td2) {
+				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
 					tr[i].style.display = "";
 				} else {
 					tr[i].style.display = "none";

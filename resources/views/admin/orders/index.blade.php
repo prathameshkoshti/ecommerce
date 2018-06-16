@@ -16,13 +16,10 @@
 			<table id="orders" class="table table-borderless text-center">
 				<thead>
 					<tr>
-						<th colspan="6">
+						<th colspan="7">
 							<div class="search-wrapper">
-								<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
+								<input placeholder="Search for User Name, Product Name, Shipping City, Delivery Status or Status" class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 							</div>
-						</th>
-						<th>
-							<button class="btn btn-primary" onclick="location.href='shippings/create'"><i class="fa fa-plus"></i><b> Create</b></button>
 						</th>
 					</tr>
 					<tr>
@@ -56,10 +53,10 @@
 							{{$order->id}}
 						</td>
 						<td>
-							{{$order->product->name}}
+							{{$order->user->name}}
 						</td>
 						<td>
-							{{$order->user->name}}
+							{{$order->product->name}}
 						</td>
 						<td>
 							{{$order->shipping->city}}
@@ -103,7 +100,7 @@
 @section('js')
 	<script>
 		function searchKeyword() {
-			var input, filter, table, tr, td1, td2, td3, td4, i;
+			var input, filter, table, tr, td1, td2, td3, td4, td5, i;
 			input = document.getElementById("searchField");
 			filter = input.value.toUpperCase();
 			table = document.getElementById("orders");
@@ -113,11 +110,13 @@
 				td2 = tr[i].getElementsByTagName("td")[2];
 				td3 = tr[i].getElementsByTagName("td")[3];
 				td4 = tr[i].getElementsByTagName("td")[4];
-				if (td1 || td2 || td3 || td4) {
+				td5 = tr[i].getElementsByTagName("td")[5];
+				if (td1 || td2 || td3 || td4 || td5) {
 					if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
 						td2.innerHTML.toUpperCase().indexOf(filter) > -1 ||
 						td3.innerHTML.toUpperCase().indexOf(filter) > -1 ||
-						td4.innerHTML.toUpperCase().indexOf(filter) > -1
+						td4.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+						td5.innerHTML.toUpperCase().indexOf(filter) > -1
 					) {
 						tr[i].style.display = "";
 					} else {

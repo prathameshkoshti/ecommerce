@@ -18,7 +18,7 @@
 					<tr>
 						<th colspan="5">
 							<div class="search-wrapper">
-								<input class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
+								<input placeholder="Search for Name, Category, Material or Status" class="form-control search"  onkeyup="searchKeyword();" type="text" name="search" id="searchField">
 							</div>
 						</th>
 						<th width=100px>
@@ -102,8 +102,10 @@
 			td3 = tr[i].getElementsByTagName("td")[3];
 			td4 = tr[i].getElementsByTagName("td")[4];
 			if (td1 || td2 || td3 || td4) {
-				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1
-				|| td3.innerHTML.toUpperCase().indexOf(filter) > -1 || td4.innerHTML.toUpperCase().indexOf(filter) > -1 ) {
+				if (td1.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td2.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td3.innerHTML.toUpperCase().indexOf(filter) > -1 ||
+					td4.innerHTML.toUpperCase().indexOf(filter) > -1 ) {
 					tr[i].style.display = "";
 				} else {
 					tr[i].style.display = "none";
