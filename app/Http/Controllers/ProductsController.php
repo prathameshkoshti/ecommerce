@@ -49,7 +49,6 @@ class ProductsController extends Controller
 			'material' => 'required',
 			'description' => 'required',
 			'price' => 'required|numeric',
-			'quantity' => 'required|max:100|min:1',
 			'images' => 'required',
  			'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
 		]);
@@ -60,7 +59,6 @@ class ProductsController extends Controller
 		$product->material_id = $request->material;
 		$product->description = $request->description;
 		$product->price = $request->price;
-		$product->quantity = $request->quantity;
 
 		if($request->hasFile('images'))
 		{
@@ -164,7 +162,6 @@ class ProductsController extends Controller
 			'material' => 'required',
 			'description' => 'required',
 			'price' => 'required|numeric',
-			'quantity' => 'required|max:100|min:1',
 		]);
 
 		$product->name = $request->name;
@@ -172,7 +169,6 @@ class ProductsController extends Controller
 		$product->material_id = $request->material;
 		$product->description = $request->description;
 		$product->price = $request->price;
-		$product->quantity = $request->quantity;
 		$product->status = $request->status == 'on' ? 1 : 0;
 		$product->updated_by = Auth::user()->id;
 

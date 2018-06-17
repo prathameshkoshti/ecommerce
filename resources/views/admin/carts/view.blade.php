@@ -23,18 +23,18 @@
 					<div class="row">
 						<div class="card-image col-md-4">
 							@php
-							$images = explode(',', $cart_item->product->image_names);
+							$images = explode(',', $cart_item->quantity->product->image_names);
 							@endphp
-							<img class= width="150px" height="150px" src="{{url('storage/'.$cart_item->product->category->name.'/'.$images[0])}}" alt="{{$cart_item->product->name}}">
+							<img class= width="150px" height="150px" src="{{url('storage/'.$cart_item->quantity->product->category->name.'/'.$images[0])}}" alt="{{$cart_item->quantity->product->name}}">
 						</div>
 						<div class="col-md-6 col-md-offset-1 card-info">
 							<p>
-								<a href="/admin/products/view/{{$cart_item->product->id}}"><span class="product">{{$cart_item->product->name}}</span><br></a>
-								<em class="category">{{$cart_item->product->category->name}}</em>
+								<a href="/admin/products/view/{{$cart_item->quantity->product->id}}"><span class="product">{{$cart_item->quantity->product->name}}</span><br></a>
+								<em class="category">{{$cart_item->quantity->product->category->name}}</em>
 							</p>
-							Size: <span class="size">{{$cart_item->size}}</span><br>
-							Quantity: <span class="quantity">{{$cart_item->quantity}}</span>
-							Price: <span class="inr">&#8377 {{$cart_item->product->price * $cart_item->quantity}}</span>
+							Size: <span class="size">{{$cart_item->quantity->size->name}}</span><br>
+							Quantity: <span class="quantity">{{$cart_item->ordered_quantity}}</span>
+							Total Cost: <span class="inr">$ {{$cart_item->quantity->product->price * $cart_item->ordered_quantity}}</span>
 							<br>
 							<br>
 							<div class="delete-item">
@@ -61,16 +61,16 @@
 						@php
 						$cart_total = 0;
 						foreach($cart as $cart_item)
-							$cart_total += ($cart_item->quantity * $cart_item->product->price)
+							$cart_total += ($cart_item->ordered_quantity * $cart_item->quantity->product->price)
 						@endphp
-						&#8377 {{$cart_total}}
+						$ {{$cart_total}}
 					</td>
 				</tr>
 					<td>
 						Estimated Tax
 					</td>
 					<td>
-						&#8377 {{$tax = round(($cart_total)*(18/100), 2)}}
+						$ {{$tax = round(($cart_total)*(18/100), 2)}}
 					</td>
 				</tr>
 				<tr>
@@ -79,12 +79,9 @@
 					</td>
 					<td>
 						@php
-							if($cart_total >= 499 || $cart_total <= 0)
-								$delivery_charges = 0;
-							else
-								$delivery_charges = 100;
+							$cart_total >= 499 || $cart_total == 0 ? $delivery_charges = 0 : $delivery_charges = 49;
 						@endphp
-						&#8377 {{$delivery_charges == 0 ? $cart_total == 0 ? '0' : 'Free' : $delivery_charges}}
+						{{$delivery_charges == 0 ? $cart_total == 0 ? '0' : 'Free' : '$ '.$delivery_charges}}
 					</td>
 				</tr>
 			</table>
@@ -98,7 +95,7 @@
 					</td>
 					<td>
 						<span class="text-bold">
-							&#8377 {{$cart_total + $tax + $delivery_charges}}
+							$ {{$cart_total + $tax + $delivery_charges}}
 						</span>
 					</td>
 				</tr>

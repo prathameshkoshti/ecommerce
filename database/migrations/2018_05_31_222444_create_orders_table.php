@@ -15,11 +15,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id');
+            $table->integer('quantity_id');
             $table->integer('user_id');
             $table->integer('shipping_id');
-            $table->integer('quantity');
-            $table->integer('size');
+            $table->integer('ordered_quantity');
             $table->float('price', 8, 2);
 			$table->date('order_date');
 			$table->tinyInteger('delivery_status')->comment('0 => Confirmed, 1 => Dispatched, 2 => Delivered, 3 => Cancelled')->default(0);

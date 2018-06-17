@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartsTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCartsTable extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('quantity_id');
-            $table->integer('user_id');
-            $table->integer('ordered_quantity');
+        Schema::create('ratings', function (Blueprint $table) {
+			$table->increments('id');
+			$table->integer('order_id');
+			$table->integer('rating')->comment('1, 2, 3, 4, 5');
+			$table->text('feedback')->nullable();
             $table->tinyInteger('status')->comment('0 => Inactive, 1 => Active')->default(1);
             $table->timestamp('created_at')->nullable()->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('created_by')->nullable();
@@ -33,6 +33,6 @@ class CreateCartsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('ratings');
     }
 }

@@ -53,4 +53,19 @@
 	.table-borderless tbody+tbody,.table-borderless td,.table-borderless th,.table-borderless thead th{
 		border:0 !important;
 	}
+	.fa-star, .fa-star-o{
+		color: yellow;
+	}
+	.star-rating {
+		max-width: 2em;
+		max-width: 2em;
+		font-size: 1.4em;
+		position: relative;
+		bottom: 2px;
+		background: yellow;
+		padding: 1% 2%;
+		border-radius: 100px;
+		color: #414141;
+		text-align: center;
+	}
 </style>

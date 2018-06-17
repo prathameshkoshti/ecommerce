@@ -4,21 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Rating extends Model
 {
     protected $fillable = [
-		'quantity_id', 'user_id', 'ordered_quantity',
+		'order_id', 'rating', 'feedback'
 	];
-
-	public function user()
-	{
-		return $this->belongsTo('App\User');
-	}
-
-	public function quantity()
-	{
-		return $this->belongsTo('App\Quantity');
-	}
 
 	public function createdBy()
 	{
@@ -28,5 +18,10 @@ class Cart extends Model
 	public function updatedBy()
 	{
 		return $this->belongsTo('App\User', 'updated_by');
+	}
+
+	public function order()
+	{
+		return $this->belongsTo('App\Order');
 	}
 }

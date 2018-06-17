@@ -25,6 +25,16 @@ class Quantity extends Model
 		return $this->belongsTo('App\Product');
 	}
 
+	public function order()
+	{
+		return $this->hasMany('App\Order');
+	}
+
+	public function cart()
+	{
+		return $this->hasMany('App\Cart');
+	}
+
 	public function size()
 	{
 		return $this->belongsTo('App\Size');

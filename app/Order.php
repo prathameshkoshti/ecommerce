@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-		'product_id', 'user_id', 'shipping_id', 'quantity',
-		'size', 'price', 'order_date', 'delivery_status',
+		'quantity_id', 'user_id', 'shipping_id', 'ordered_quantity',
+		'price', 'order_date', 'delivery_status',
 	];
 
 	public function user()
@@ -16,9 +16,9 @@ class Order extends Model
 		return $this->belongsTo('App\User');
 	}
 
-	public function product()
+	public function quantity()
 	{
-		return $this->belongsTo('App\Product');
+		return $this->belongsTo('App\Quantity');
 	}
 
 	public function shipping()
@@ -34,5 +34,10 @@ class Order extends Model
 	public function updatedBy()
 	{
 		return $this->belongsTo('App\User', 'updated_by');
+	}
+
+	public function rating()
+	{
+		return $this->hasOne('App\Rating');
 	}
 }
