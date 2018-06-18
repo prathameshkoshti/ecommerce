@@ -174,9 +174,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 
 Route::get('product/{product_id}', 'UserController@getProduct');
 
-Route::get('category/{category_id}', 'UserController@getCategory');
+Route::get('category/{category_id}', 'UserController@getProductsByCategory');
 
-Route::get('search/{search_query}', 'UserController@search');
+Route::get('search/{search_query}', 'UserController@getProductsBySearch');
+
+Route::get('accessories', 'UserController@getAccessories');
 
 Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 
@@ -197,9 +199,9 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 	Route::group(['prefix' => 'cart'], function(){
 		Route::get('/', 'UserController@getCart');
 
-		Route::get('addItem/{product_id}', 'UserController@addToCart');
+		Route::get('addItem/{quantity_id}', 'UserController@addToCart');
 
-		Route::get('delete/{product_id}', 'UserController@deleteFromCart');
+		Route::get('delete/{quantity_id}', 'UserController@deleteFromCart');
 	});
 
 	Route::group(['prefix' => 'wishlist'], function(){

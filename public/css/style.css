@@ -10,8 +10,8 @@ box-sizing: border-box
 .product-images-view {
 	vertical-align: middle;
 }
-.fa{
-	color: #212121 !important;
+.nav-item .fa-shopping-bag, .nav-item  .fa-heart{
+	color: #717171;
 }
 .email{
 	font-size: .7em;
@@ -454,7 +454,7 @@ img {vertical-align: middle;}
 	font-weight: 900;
 	font-size: 1.2em;
 }
-.product-name {
+.product-info-container > .product-name {
 	font-family: 'Valencia';
 	font-size: 2em;
 	font-weight: 300;
