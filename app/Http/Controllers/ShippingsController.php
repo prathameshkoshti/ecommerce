@@ -48,7 +48,7 @@ class ShippingsController extends Controller
 			'user' => 'required',
 			'city' => 'required',
 			'state' => 'required',
-			'pincode' => 'required|numeric',
+			'pincode' => 'required|numeric|digits:6',
 		]);
 
 		Shipping::create([
@@ -134,7 +134,7 @@ class ShippingsController extends Controller
 			'user' => 'required',
 			'city' => 'required',
 			'state' => 'required',
-			'pincode' => 'required|numeric',
+			'pincode' => 'required|numeric|digits:6',
 		]);
 
 		$shipping->user_id = $request->user;
@@ -171,7 +171,7 @@ class ShippingsController extends Controller
 		$shipping->status = 0;
 		$shipping->updated_by = Auth::user()->id;
 		$shipping->save();
-		
+
 		\Session::flash('warning', 'Shipping address for user:'.$shipping->user->name.' deleted successfully!');
 		return redirect('/admin/shippings');
     }

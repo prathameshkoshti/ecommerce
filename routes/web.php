@@ -172,7 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
     Route::put('update_password', 'ProfilesController@updatePassword');
 });
 
-Route::get('product/{product_id}', 'UserController@getProduct');
+Route::get('product/view/{product_id}', 'UserController@getProduct');
 
 Route::get('category/{category_id}', 'UserController@getProductsByCategory');
 
@@ -199,17 +199,23 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 	Route::group(['prefix' => 'cart'], function(){
 		Route::get('/', 'UserController@getCart');
 
-		Route::get('addItem/{quantity_id}', 'UserController@addToCart');
+		Route::put('update_quantity/{id}', 'UserController@updateCartQuantity');
 
-		Route::get('delete/{quantity_id}', 'UserController@deleteFromCart');
+		Route::put('add_item/{product_id}', 'UserController@addToCart');
+
+		Route::get('remove_item/{quantity_id}', 'UserController@removeFromCart');
+
+		Route::get('move_to_wishlist/{cart_id}', 'UserController@moveToWishlist');
 	});
 
 	Route::group(['prefix' => 'wishlist'], function(){
 		Route::get('/', 'UserController@getWishlist');
 
-		Route::get('addItem/{product_id}', 'UserController@addToCart');
+		Route::put('add_item/{product_id}', 'UserController@addToWishlist');
 
-		Route::get('delete/{product_id}', 'UserController@deleteFromWishlist');
+		Route::get('remove_item/{product_id}', 'UserController@removeFromWishlist');
+
+		Route::get('move_to_cart/{product_id}', 'UserController@moveToCart');
 	});
 
 	Route::group(['prefix' => 'profile'], function(){
@@ -218,4 +224,16 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 		Route::get('edit', 'UserController@editProfile');
 		Route::put('update', 'UserController@updateProfile');
 	});
+
+	Route::group(['prefix' => 'shipping_addresses'], function() {
+		Route::put('store', 'UserController@storeShipping');
+	});
+
+	Route::get('order_placed', 'UserController@orderPlaced');
+});
+
+Route::group(['prefix' => 'checkout', 'middleware' => 'checkUser'], function(){
+	Route::get('/', 'UserController@checkout');
+
+	Route::put('place_order', 'UserController@placeOrder');
 });

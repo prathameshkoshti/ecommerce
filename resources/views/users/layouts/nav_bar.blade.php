@@ -151,7 +151,6 @@
 	$(document).ready(function(){
 		$("#form-search").submit(function(){
 			let s = $("#search-input").val();
-			console.log(s);
 			$('#form-search').prop('action', '/search/'+s);
 		});
 

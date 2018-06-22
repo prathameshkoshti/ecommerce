@@ -7,6 +7,15 @@
 * {
 box-sizing: border-box
 }
+input:focus{
+	outline: none !important;
+    border:1px solid #ffa900;
+    box-shadow: 0 0 10px #ffa900;
+}
+.alert{
+	z-index: 999999999999;
+	border: 0px;
+}
 .product-images-view {
 	vertical-align: middle;
 }
@@ -463,9 +472,6 @@ img {vertical-align: middle;}
 	background: #ffa900;
 	color: #fff;
 	padding: 2%;
-}
-.product-note-2{
-	margin-top: 20px;
 }
 .primary-btn{
 	align-self: baseline;

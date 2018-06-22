@@ -34,7 +34,7 @@
 				<div class="bs-products-container">
 					@foreach($products as $product)
 						<div class="bs-product">
-							<a href="/product/{{$product->id}}">
+							<a href="/product/view/{{$product->id}}">
 							@php
 								$images = explode(',', $product->image_names);
 							@endphp

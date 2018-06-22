@@ -29,7 +29,7 @@
 		</div>
 	</div>
 	<div class="col-md-5">
-		<form action="" class=" product-info-container">
+		<form method="POST" action="/my/cart/add_item/{{$product->id}}" class="product-info-container">
 			<span class="product-category-name">{{$product->category->name}}</span>
 			<p class="product-name">
 				{{$product->name}}
@@ -47,20 +47,21 @@
 				{{$product->description}}
 			</p>
 			<p>
-				<select name="size" class="form-control">
-					<option value="" selected disabled>Select your shoe size</option>
+				<select name="size" class="form-control" required=required>
+					<option selected disabled>Select your shoe size</option>
 					@foreach($sizes as $size)
 					<option value="{{$size->size->id}}">{{$size->size->name}}</option>
 					@endforeach
 				</select>
 				<br>
-				<button class="btn btn-add-to-bag button form-control">
-					ADD TO BAG
-				</button>
+				<input type="submit" value="ADD TO BAG" class="btn btn-add-to-bag form-control">
+				@method('PUT')
+				@csrf
 			</p>
 			<p class="product-note-2">
 				Fits true to size. If between sizes, select the size down.
 			</p>
+			@include('users.layouts.resources')
 			<div class="hr hr-2">
 				<hr>
 			</div>
