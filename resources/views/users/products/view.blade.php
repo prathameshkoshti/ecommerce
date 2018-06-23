@@ -24,12 +24,12 @@
 		@endphp
 		<div style="text-align:center" class="thumbnails">
 			@for($i=0; $i<$n; $i++)
-				<img  class="thumbnail" src="{{url('storage/'.$product->category->name.'/'.$thumbnails[$i])}}" alt=""  onclick="currentSlide({{$i+1}})" width="100px" height="100px">
+				<img class="thumbnail" src="{{url('storage/'.$product->category->name.'/'.$thumbnails[$i])}}" alt=""  onclick="currentSlide({{$i+1}})" width="100px" height="100px">
 			@endfor
 		</div>
 	</div>
 	<div class="col-md-5">
-		<form method="POST" action="/my/cart/add_item/{{$product->id}}" class="product-info-container">
+		<div class="product-info-container">
 			<span class="product-category-name">{{$product->category->name}}</span>
 			<p class="product-name">
 				{{$product->name}}
@@ -47,16 +47,18 @@
 				{{$product->description}}
 			</p>
 			<p>
-				<select name="size" class="form-control" required=required>
-					<option selected disabled>Select your shoe size</option>
-					@foreach($sizes as $size)
-					<option value="{{$size->size->id}}">{{$size->size->name}}</option>
-					@endforeach
-				</select>
-				<br>
-				<input type="submit" value="ADD TO BAG" class="btn btn-add-to-bag form-control">
-				@method('PUT')
-				@csrf
+				<form id="product-form" method="POST" action="/my/cart/add_item/{{$product->id}}">
+					<select name="size" class="form-control" id="size" required>
+						<option selected disabled>Select your shoe size</option>
+						@foreach($sizes as $size)
+						<option value="{{$size->size->id}}">{{$size->size->name}}</option>
+						@endforeach
+					</select>
+					<br>
+					<input type="submit" value="ADD TO BAG" class="btn btn-add-to-bag form-control">
+					@method('PUT')
+					@csrf
+				</form>
 			</p>
 			<p class="product-note-2">
 				Fits true to size. If between sizes, select the size down.
@@ -65,9 +67,10 @@
 			<div class="hr hr-2">
 				<hr>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
+<br><br><br>
 <br><br><br>
 <br><br><br>
 @include('users.layouts.footer')
@@ -86,7 +89,7 @@
 		function showSlides(n) {
 			var i;
 			var slides = document.getElementsByClassName("mySlides");
-			var dots = document.getElementsByClassName("dot");
+			var dots = document.getElementsByClassName("thumbnail");
 			if (n > slides.length) {slideIndex = 1}
 			if (n < 1) {slideIndex = slides.length}
 			for (i = 0; i < slides.length; i++) {
@@ -97,6 +100,18 @@
 			}
 			slides[slideIndex-1].style.display = "block";
 			dots[slideIndex-1].className += " active";
+		}
+
+		document.getElementById('product-form').onsubmit = function() {
+			validate();
+		};
+		function validate() {
+			var select = document.getElementById('size');
+			var selected_size = select.options[select.selectedIndex].value;
+			alert(selected_size);
+			if(selected_size == 0) {
+				alert("Please select proper size");
+			}
 		}
 	</script>
 @stop
