@@ -12,6 +12,7 @@ use App\Shipping;
 use App\Category;
 use App\Rating;
 use App\Quantity;
+use Hash;
 
 class UserController extends Controller
 {
@@ -387,7 +388,7 @@ class UserController extends Controller
 		return view('users.profile_settings.dashboard', compact('shipping'));
 	}
 
-	public function getAccountInformation()
+	public function getAccountInformation(Request $request)
 	{
 		$profile = Auth::user();
 		return view('users.profile_settings.account_info', compact('profile'));
@@ -396,7 +397,29 @@ class UserController extends Controller
 	public function updateAccountInformation(Request $request)
 	{
 		$profile = Auth::user();
-		return redirect('/my/profile');
+
+		$this->validate($request, [
+			'name' => 'required',
+			'email' => 'required|email',
+			'mobile_no' => 'required|digits:10',
+			'old_password' => 'required|max:100|min:5'
+		]);
+
+		if(Hash::check($request->old_password, $profile->password)) {
+			$profile->name = $request->name;
+			$profile->email = $request->email;
+			$profile->mobile_no = $request->mobile_no;
+
+			if($request->new_password)
+				$profile->password = bcrypt($request->new_password);
+			$profile->save();
+			\Session::flash('success', 'Account Information Updated Successfully!');
+		}
+		else {
+			\Session::flash('danger', 'Error Occured While Updating the Account Information!');
+		}
+
+		return redirect('/my/account_information');
 	}
 
 	public function getOrders()

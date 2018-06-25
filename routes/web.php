@@ -235,7 +235,7 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 		Route::put('store', 'UserController@storeShipping');
 
 		Route::get('edit/{id}', 'UserController@editShipping');
-		Route::put('update/{id}', 'UserController@updateShipping');
+		Route::put('update/{id}', 'UserController@update`Shipping');
 
 		Route::get('delete/{id}', 'UserController@deleteShipping');
 	});

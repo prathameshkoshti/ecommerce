@@ -41,7 +41,7 @@ class UsersController extends Controller
 			'name' => 'required',
 			'email' => 'required|email',
 			'password' => 'required|max:100|min:5',
-			'mobile_no' =>	'required|numeric',
+			'mobile_no' =>	'required|digit:10',
 		]);
 		$user = User::create([
 			'name' => request('name'),
@@ -112,7 +112,7 @@ class UsersController extends Controller
 		$this->validate($request, [
 			'name' => 'required',
 			'email' => 'required|email',
-			'mobile_no' =>	'required|numeric',
+			'mobile_no' =>	'required|digit:10',
 		]);
 
 		$user->name = request('name');
@@ -124,7 +124,7 @@ class UsersController extends Controller
 		if(request('password'))
 		{
 			$this->validate($request, [
-				'password' => 'required|min:5|max|100',
+				'password' => 'required|min:5|max:100',
 			]);
 			$user->password = bcrypt(request('password'));
 		}
