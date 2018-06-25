@@ -10,6 +10,7 @@ use App\Order;
 use App\Product;
 use App\Shipping;
 use App\Category;
+use App\Rating;
 use App\Quantity;
 
 class UserController extends Controller
@@ -117,13 +118,30 @@ class UserController extends Controller
 		$wishlist = Wishlist::where([
 			['status', 1],
 			['user_id', Auth::user()->id],
-		])->get();
+		])->latest()->paginate(12);
 
-		dd($wishlist);
-
-		return view('users.wishlist.view');
+		return view('users.profile_settings.wishlist', compact('wishlist'));
 	}
 
+	public function removeFromWishlist($id) {
+		$wishlist = Wishlist::find($id);
+		if($wishlist) {
+			if($wishlist->user_id == Auth::user()->id) {
+				$wishlist->status = 0;
+				$wishlist->updated_by = Auth::user()->id;
+				$wishlist->save();
+				\Session::flash('warning', 'Removed from wishlist!');
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else
+		{
+			\Session::flash('danger', 'No item found with item: '.$id);
+		}
+		return redirect('my/wishlist');
+	}
 	public function addToWishlist($product_id)
 	{
 		$wishlist = Wishlist::where([
@@ -167,7 +185,7 @@ class UserController extends Controller
 		$cart = Cart::where([
 			['status', 1],
 			['user_id', Auth::user()->id],
-		])->get();
+		])->latest()->get();
 
 		return view('users.checkout.cart', compact('cart'));
 	}
@@ -201,21 +219,23 @@ class UserController extends Controller
 			['user_id', Auth::user()->id],
 			['quantity_id', request('size')],
 		])->get()->first();
-		if($cart->status == 0){
-			$cart->ordered_quantity = 1;
-			$cart->status = 1;
-			$cart->save();
-		}
-		elseif($cart->status == 1){
-			$cart->ordered_quantity += 1;
-			if($cart->ordered_quantity > $cart->quantity->quantity)
-			{
-				\Session::flash('warning', 'Quantity exceeded than the current stock');
-				return redirect('/my/cart');
-			}
-			else
-			{
+		if($cart) {
+			if($cart->status == 0){
+				$cart->ordered_quantity = 1;
+				$cart->status = 1;
 				$cart->save();
+			}
+			elseif($cart->status == 1){
+				$cart->ordered_quantity += 1;
+				if($cart->ordered_quantity > $cart->quantity->quantity)
+				{
+					\Session::flash('warning', 'Quantity exceeded than the current stock');
+					return redirect('/my/cart');
+				}
+				else
+				{
+					$cart->save();
+				}
 			}
 		}
 		else{
@@ -312,7 +332,7 @@ class UserController extends Controller
 		return redirect('/');
 	}
 
-	public function placeorder(Request $request)
+	public function placeOrder(Request $request)
 	{
 		$this->validate($request, [
 			'shipping' => 'required|numeric',
@@ -344,7 +364,7 @@ class UserController extends Controller
 		}
 
 		\Session::flash('order_placed', 'Order Placed Successfully!');
-		return redirect('/my/order_placed');
+		return redirect('/my/checkout/order_placed');
 	}
 
 	public function orderPlaced()
@@ -355,21 +375,25 @@ class UserController extends Controller
 	}
 
 	/*
-		User Settings
+		User Account Dashboard and its Settings
 	*/
-	public function getProfile()
+	public function getDashboard()
 	{
-		$profile = Auth::user();
-		return view('users.profile.view', compact('profile'));
+		$shipping = Shipping::where([
+			['status', 1],
+			['user_id', Auth::user()->id]
+		])->first();
+
+		return view('users.profile_settings.dashboard', compact('shipping'));
 	}
 
-	public function editProfile()
+	public function getAccountInformation()
 	{
 		$profile = Auth::user();
-		return view('users.profile.edit', compact('profile'));
+		return view('users.profile_settings.account_info', compact('profile'));
 	}
 
-	public function updateProfile(Request $request)
+	public function updateAccountInformation(Request $request)
 	{
 		$profile = Auth::user();
 		return redirect('/my/profile');
@@ -380,9 +404,39 @@ class UserController extends Controller
 		$orders = Order::where([
 			['status', 1],
 			['user_id', Auth::user()->id],
-		])->get();
+		])->paginate(4);
 
-		return view('users.orders.view');
+		return view('users.profile_settings.orders.index', compact('orders'));
+	}
+
+	public function viewOrder($id) {
+		$order = Order::find($id);
+		if($order)
+		{
+			if($order->user_id == Auth::user()->id)
+				return view('users.profile_settings.orders.view', compact('order'));
+			else
+				return view('errors.401');
+		}
+		else
+		{
+			\Session::flash('danger', 'No order found having id');
+			return redirect('/my/orders');
+		}
+	}
+
+	public function getShippings() {
+		$shippings = Shipping::where([
+			['status', 1],
+			['user_id', Auth::user()->id],
+		])->paginate(6);
+
+		return view('users.profile_settings.address_book.index', compact('shippings'));
+	}
+
+	public function createShipping() {
+		$states = require_once(base_path().'/resources/views/libraries/states.php');
+		return view('users.profile_settings.address_book.create', compact('states'));
 	}
 
 	public function storeShipping(Request $request)
@@ -417,7 +471,83 @@ class UserController extends Controller
 			return redirect(url()->previous());
 		}
 		else {
-			return redirect('/my/shipping_addresses');
+			return redirect('/my/address_book');
 		}
+	}
+
+	public function editShipping($id) {
+		$shipping = Shipping::find($id);
+		if($shipping) {
+			if($shipping->user_id == Auth::user()->id) {
+				$states = require_once(base_path().'/resources/views/libraries/states.php');
+				return view('users.profile_settings.address_book.edit', compact('shipping', 'states'));
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No shipping found having the id: '.$id);
+			return redirect('/my/address_book');
+		}
+	}
+
+	public function updateShipping(Request $request, $id) {
+		$shipping = Shipping::find($id);
+		if($shipping) {
+			if($shipping->user_id == Auth::user()->id) {
+				$this->validate($request, [
+					'address' => 'required',
+					'city' => 'required',
+					'state' => 'required',
+					'pincode' => 'required|digits:6',
+				]);
+
+				$shipping->address = $request->address;
+				$shipping->city = $request->city;
+				$shipping->state = $request->state;
+				$shipping->pincode = $request->pincode;
+				$shipping->updated_by = Auth::user()->id;
+				if($request->landmark)
+					$shipping->landmark = $request->landmark;
+				$shipping->save();
+
+				\Session::flash('success', 'Address updated successfully!');
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No shipping found having the id: '.$id);
+		}
+		return redirect('/my/address_book');
+	}
+
+	public function deleteShipping(Request $request, $id) {
+		$shipping = Shipping::find($id);
+		if($shipping) {
+			if($shipping->user_id == Auth::user()->id) {
+				$shipping->status = 0;
+				$shipping->updated_by = Auth::user()->id;
+				$shipping->save();
+
+				\Session::flash('warning', 'Address deleted successfully');
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No shipping found having the id: '.$id);
+		}
+		return redirect('/my/address_book');
+	}
+
+	public function getReviews() {
+		/* $reviews = Rating::where([
+			['user_id', Auth::user()->id],
+			['status', 1],
+		])->get(); */
 	}
 }

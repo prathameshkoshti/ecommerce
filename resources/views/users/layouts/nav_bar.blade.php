@@ -1,6 +1,5 @@
 @extends('users.layouts.master')
 
-@section('title', 'Home')
 @section('body')
 <div class="container-fluid">
 	<div class="row">
@@ -89,7 +88,7 @@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="/register">Sign Up</a>
 								@else
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="/my/account_dashboard">
 										{{Auth::user()->name}}<br>
 										<em class="email"><i class="fa fa-user"></i> {{Auth::user()->email}}</em>
 									</a>

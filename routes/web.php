@@ -194,7 +194,11 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 		Route::get('delete/{id}', 'UserController@deleteShippings');
 	});
 
-	Route::get('orders', 'UserController@getOrders');
+	Route::group(['prefix' => 'orders'], function(){
+		Route::get('/', 'UserController@getOrders');
+
+		Route::get('view/{order_id}', 'UserController@viewOrder');
+	});
 
 	Route::group(['prefix' => 'cart'], function(){
 		Route::get('/', 'UserController@getCart');
@@ -214,26 +218,45 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 		Route::put('add_item/{product_id}', 'UserController@addToWishlist');
 
 		Route::get('remove_item/{product_id}', 'UserController@removeFromWishlist');
-
-		Route::get('move_to_cart/{product_id}', 'UserController@moveToCart');
 	});
 
-	Route::group(['prefix' => 'profile'], function(){
-		Route::get('/', 'UserController@getProfile');
+	Route::get('/account_dashboard', 'UserController@getDashboard');
 
-		Route::get('edit', 'UserController@editProfile');
-		Route::put('update', 'UserController@updateProfile');
+	Route::group(['prefix' => 'account_information'], function(){
+		Route::get('/', 'UserController@getAccountInformation');
+
+		Route::put('update', 'UserController@updateAccountInformation');
 	});
 
-	Route::group(['prefix' => 'shipping_addresses'], function() {
+	Route::group(['prefix' => 'address_book'], function() {
+		Route::get('/', 'UserController@getShippings');
+
+		Route::get('create', 'UserController@createShipping');
 		Route::put('store', 'UserController@storeShipping');
+
+		Route::get('edit/{id}', 'UserController@editShipping');
+		Route::put('update/{id}', 'UserController@updateShipping');
+
+		Route::get('delete/{id}', 'UserController@deleteShipping');
 	});
 
-	Route::get('order_placed', 'UserController@orderPlaced');
+	Route::group(['prefix' => 'reviews'], function() {
+		Route::get('/', 'UserController@getReviews');
+
+		Route::get('create', 'UserController@createReview');
+		Route::get('store', 'UserController@storeReview');
+
+		Route::get('edit/{id}', 'UserController@editReview');
+		Route::get('update/{id}', 'UserController@updateReview');
+
+		Route::get('delete', 'UserController@deleteReview');
+	});
 });
 
 Route::group(['prefix' => 'checkout', 'middleware' => 'checkUser'], function(){
 	Route::get('/', 'UserController@checkout');
 
 	Route::put('place_order', 'UserController@placeOrder');
+
+	Route::get('order_placed', 'UserController@orderPlaced');
 });
