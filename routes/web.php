@@ -215,7 +215,7 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 	Route::group(['prefix' => 'wishlist'], function(){
 		Route::get('/', 'UserController@getWishlist');
 
-		Route::put('add_item/{product_id}', 'UserController@addToWishlist');
+		Route::get('add_item/{product_id}', 'UserController@addToWishlist');
 
 		Route::get('remove_item/{product_id}', 'UserController@removeFromWishlist');
 	});
