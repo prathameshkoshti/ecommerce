@@ -15,6 +15,10 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
+//Error Routes
+Route::view('/404', 'errors.404');
+Route::view('/401', 'errors.401');
+
 //Admin Routes
 Route::group(['prefix' => 'admin', 'middleware' => 'checkAdmin'], function(){
 
@@ -243,13 +247,15 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 	Route::group(['prefix' => 'reviews'], function() {
 		Route::get('/', 'UserController@getReviews');
 
-		Route::get('create', 'UserController@createReview');
-		Route::get('store', 'UserController@storeReview');
+		Route::get('unreviewed', 'UserController@getUnreviewed');
+
+		Route::get('create/{id}', 'UserController@createReview');
+		Route::put('store', 'UserController@storeReview');
 
 		Route::get('edit/{id}', 'UserController@editReview');
-		Route::get('update/{id}', 'UserController@updateReview');
+		Route::put('update/{id}', 'UserController@updateReview');
 
-		Route::get('delete', 'UserController@deleteReview');
+		Route::get('delete/{id}', 'UserController@deleteReview');
 	});
 });
 

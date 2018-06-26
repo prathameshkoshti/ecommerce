@@ -10,6 +10,7 @@ use App\Order;
 use App\Product;
 use App\Shipping;
 use App\Category;
+use App\Material;
 use App\Rating;
 use App\Quantity;
 use Hash;
@@ -87,6 +88,16 @@ class UserController extends Controller
 				$products_collection->push($product);
 			}
 		}
+
+		$materials_id = Category::where('name', 'like', '%'.$search_query.'%')->pluck('id');
+		foreach($materials_id as $id)
+		{
+			$products = Product::where('material_id', '=', $id)->get();
+			foreach($products as $product)
+			{
+				$products_collection->push($product);
+			}
+		}
 		$category = 0;
 		$products = $products_collection->unique('name');
 		return view('users.products.index', compact('products', 'search_query', 'category', 'wishlist'));
@@ -146,7 +157,7 @@ class UserController extends Controller
 	public function addToWishlist($product_id)
 	{
 		$wishlist = Wishlist::where([
-			['user_id', Auht::user()->id],
+			['user_id', Auth::user()->id],
 			['product_id', $product_id],
 		])->first();
 
@@ -173,7 +184,7 @@ class UserController extends Controller
 				'updated_by' => Auth::user()->id,
 			]);
 		}
-		\Session::view('success', 'Item: '.$wishlist->product->name.' addedd to wishlist successfully!');
+		\Session::flash('success', 'Item: '.$wishlist->product->name.' addedd to wishlist successfully!');
 		return redirect('/my/wishlist');
 	}
 
@@ -568,9 +579,128 @@ class UserController extends Controller
 	}
 
 	public function getReviews() {
-		/* $reviews = Rating::where([
-			['user_id', Auth::user()->id],
-			['status', 1],
-		])->get(); */
+		$orders_without_rating = Order::doesntHave('rating')->latest()->take(3)->get();
+		$orders_with_rating = Order::has('rating')->paginate(2);
+		return view('users.profile_settings.reviews.index', compact('orders_without_rating', 'orders_with_rating'));
+	}
+
+	public function createReview($id) {
+		$rating = Rating::where([
+				['order_id', $id],
+			])->get();
+		if(count($rating) == 0) {
+			$order = Order::find($id);
+			if($order){
+				if($order->user_id == Auth::user()->id)
+					return view('users.profile_settings.reviews.create', compact('order'));
+				else {
+					return view('errors.404');
+				}
+			}
+			else {
+				\Session::flash('danger', 'Order Not found!');
+			}
+		}
+		else{
+			\Session::flash('Order Already Reviewed!');
+		}
+		return redirect('/my/reviews');
+	}
+
+	public function storeReview(Request $request) {
+		$order = Order::find($request->order);
+		if($order->user_id == Auth::user()->id) {
+			$this->validate($request, [
+				'order' => 'required|digits:1',
+				'rating' => 'required|digits:1|min:1|max:5',
+			]);
+			try {
+				$rating = Rating::create([
+					'order_id' => $request->order,
+					'rating' => $request->rating,
+					'created_by' => Auth::user()->id,
+					'updated_by' => Auth::user()->id,
+				]);
+
+				if($request->feedback) {
+					$rating->feedback = $request->feedback;
+					$rating->save();
+				}
+				\Session::flash('success', 'Review Submitted!');
+			}
+			catch(\PDOException $e)
+			{
+				\Session::flash('danger', $e->errorInfo[2].': Review already exist!');
+			}
+		}
+		else {
+			return view('errors/401');
+		}
+		return redirect('/my/reviews');
+	}
+
+	public function editReview($id) {
+		$rating = Rating::find($id);
+		if($rating) {
+			if($rating->order->user_id == Auth::user()->id) {
+				return view('users.profile_settings.reviews.edit', compact('rating'));
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No user rating found!');
+			return redirect('/my/reviews');
+		}
+	}
+
+	public function updateReview(Request $request, $id) {
+		$rating = Rating::find($id);
+		if($rating) {
+			if($rating->order->user_id == Auth::user()->id) {
+				$this->validate($request, [
+					'rating' => 'required|digits:1|min:1|max:5',
+				]);
+
+				$rating->rating = $request->rating;
+				$rating->updated_by = Auth::user()->id;
+				if($request->feedback) {
+					$rating->feedback = $request->feedback;
+				}
+				$rating->save();
+				\Session::flash('success', 'Review Updated Successfully!');
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No user rating found!');
+			return redirect('/my/reviews');
+		}
+		return redirect('my/reviews');
+	}
+
+	public function deletereview($id) {
+		$rating = Rating::find($id);
+		if($rating) {
+			if($rating->order->user_id == Auth::user()->id) {
+				$rating->forceDelete();
+			}
+			else {
+				return view('errors.404');
+			}
+		}
+		else {
+			\Session::flash('danger', 'No user rating found!');
+			return redirect('/my/reviews');
+		}
+		return redirect('/my/reviews');
+	}
+
+	public function getUnreviewed() {
+		$orders = Order::doesntHave('rating')->latest()->paginate(6);
+		return view('users.profile_settings.reviews.unreviewed', compact('orders'));
 	}
 }
