@@ -41,6 +41,7 @@
 	.more-link {
 		grid-column-start: 3;
 		margin-left: 50%;
+		margin-top: 100%;
 	}
 	.reviewed-products-container {
 		display: grid;
@@ -83,12 +84,23 @@
 	.fa-star {
 		color: #FFA900;
 	}
+	@media only screen and (max-width:1080px) {
+		.unreviewed-products-container {
+			grid-template-columns: 1fr 1fr;
+		}
+		.link {
+			margin-right: 30px;
+		}
+		.button {
+			width:40%;
+		}
+	}
 </style>
 <div class="container">
 	@include('users.layouts.resources')
 	<div class="col-md-12 menu-container">
 		<h4>
-			Products (Yet to be Rated)
+			<u><a href="/my/reviews/unreviewed" style="color: #212121">Products (Yet to be Rated)</a></u>
 		</h4>
 		<div class="unreviewed-products-container">
 			@foreach($orders_without_rating as $order)
@@ -114,9 +126,6 @@
 				</a><br>
 			</div>
 			@endforeach
-			@if(count($orders_without_rating) == 3)
-				<a href="/my/reviews/unreviewed" class="more-link link" style=""><u>more</u></a>
-			@endif
 		</div>
 		<br>
 		<hr>

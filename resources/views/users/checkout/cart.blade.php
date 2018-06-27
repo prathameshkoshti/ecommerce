@@ -9,8 +9,7 @@
 }
 .cart{
 	display: grid;
-}
-.cart > .cart-item, .cart > .hr{
+	margin-top: 20px;
 }
 .cart-item{
 	display: flex;
@@ -117,6 +116,11 @@
 	text-transform: uppercase;
 	font-size: 2em;
 	margin-bottom: 5%;
+}
+@media only screen and (max-width: 720px) {
+	.product-cat-heading:before {
+		margin-left: -10px;
+	}
 }
 </style>
 <div class="cart-container">

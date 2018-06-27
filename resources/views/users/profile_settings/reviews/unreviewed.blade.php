@@ -38,6 +38,14 @@
 		color: #212121;
 		font-size: 0.8em;
 	}
+	@media only screen and (max-width:1080px) {
+		.unreviewed-products-container {
+			grid-template-columns: 1fr 1fr;
+		}
+		.link {
+			margin-right: 30px;
+		}
+	}
 </style>
 
 <div class="container">

@@ -92,7 +92,7 @@
 										{{Auth::user()->name}}<br>
 										<em class="email"><i class="fa fa-user"></i> {{Auth::user()->email}}</em>
 									</a>
-									<a class="dropdown-item" href="#">Orders</a>
+									<a class="dropdown-item" href="/my/orders">Orders</a>
 									<div class="dropdown-divider"></div>
 										@if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
 											<a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">

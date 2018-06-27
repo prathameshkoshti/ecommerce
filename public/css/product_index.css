@@ -101,4 +101,13 @@ a:hover {
 		-webkit-transform: rotate(35deg);
     	transform: rotate(35deg);
 	}
+	.wishlist {
+		margin-left: -70px;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	.wishlist {
+		margin-left: 0px;
+	}
 }

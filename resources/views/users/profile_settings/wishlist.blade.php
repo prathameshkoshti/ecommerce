@@ -31,6 +31,11 @@
 		color: #212121;
 		font-size: 0.8em;
 	}
+	@media only screen and (max-width: 1080px) {
+		.wishlist-container {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
 </style>
 <div class="container">
 	@if($wishlist)

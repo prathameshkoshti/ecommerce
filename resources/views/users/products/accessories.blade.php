@@ -20,6 +20,8 @@
 		</div>
 	</div>
 </div>
+<br>
+<br>
 <div class="row">
 	<div class="col-md-12">
 		<div class="product-cat-heading">
@@ -59,11 +61,11 @@
 							}
 						@endphp
 						@if($flag > 0)
-							<a href="/wishlist/remove/{{$flag}}" style="color: #ffa900">
+							<a href="/	my/wishlist/remove_item/{{$flag}}" style="color: #ffa900">
 								<i class="fas fa-heart fa-lg"></i>
 							</a>
 						@else
-							<a href="/wishlist/add/{{$product->id}}" style="color: #ffa900">
+							<a href="/my/wishlist/add_item/{{$product->id}}" style="color: #ffa900">
 								<i class="far fa-heart fa-lg"></i>
 							</a>
 						@endif
