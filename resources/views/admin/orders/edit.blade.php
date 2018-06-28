@@ -21,9 +21,9 @@
 						</td>
 						<td>
 							@php
-								$image = explode(',', $order->product->image_names);
+								$image = explode(',', $order->quantity->product->image_names);
 							@endphp
-							<img class="image" width="150px" height="150px" src="{{url('storage/'.$order->product->category->name.'/'.$image[0])}}" alt="{{$order->product->name}}">
+							<img class="image" width="150px" height="150px" src="{{url('storage/'.$order->quantity->product->category->name.'/'.$image[0])}}" alt="{{$order->quantity->product->name}}">
 						</td>
 					</tr>
 					<tr>
@@ -31,7 +31,7 @@
 							Product Name:
 						</td>
 						<td>
-							{{$order->product->name}}
+							{{$order->quantity->product->name}}
 						</td>
 					</tr>
 					<tr>
@@ -39,7 +39,7 @@
 							Quantity:
 						</td>
 						<td>
-							{{$order->quantity}}
+							{{$order->ordered_quantity}}
 						</td>
 					</tr>
 					<tr>
@@ -47,7 +47,7 @@
 							Size:
 						</td>
 						<td>
-							{{$order->size}}
+							{{$order->quantity->size->name}}
 						</td>
 					</tr>
 					<tr>

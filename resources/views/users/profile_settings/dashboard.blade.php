@@ -21,23 +21,29 @@
 		</p>
 	</div>
 	<div class="col-md-12 menu-container">
-	<h4>
-		Address Book
-	</h4>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="/my/address_book" class="link"><u>Manage Addresses</u></a>
-	<br>
-	<br>
-	<p>
-		{{$shipping->address}}<br>
-		@if($shipping->landmark)
-			{{$shipping->landmark}}
-			<br>
+		<h4>
+			Address Book
+		</h4>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/my/address_book" class="link"><u>Manage Addresses</u></a>
+		<br>
+		<br>
+		@if(!$shipping)
+			<div class="col-md-12 alert alert-warning">
+				<p class="font-weight-bold flash label label-warning"><h5>No shipping addresses found.</h5></p>
+			</div>
+		@else
+		<p>
+			{{$shipping->address}}<br>
+			@if($shipping->landmark)
+				{{$shipping->landmark}}
+				<br>
+			@endif
+			{{$shipping->city}}<br>
+			{{$shipping->state}}<br>
+			{{$shipping->pincode}}<br>
+		</p>
 		@endif
-		{{$shipping->city}}<br>
-		{{$shipping->state}}<br>
-		{{$shipping->pincode}}<br>
-	</p>
 	</div>
 </div>
 @stop

@@ -17,7 +17,7 @@ class QuantitiesController extends Controller
      */
     public function index()
     {
-		$quantities = Quantity::all();
+		$quantities = Quantity::paginate(30);
 		return view('admin.quantities.index', compact('quantities'));
     }
 
@@ -46,6 +46,19 @@ class QuantitiesController extends Controller
 			'size' => 'required|numeric',
 			'quantity' => 'required|numeric|min:0',
 		]);
+
+		$product = Product::find($request->product);
+		$size = Size::find($request->size);
+
+		if($product->category->name == 'Accessory' && $size->name != 'One Size') {
+			\Session::flash('danger', 'Wrong size! Accessory can only have \'One Size\'.');
+			return redirect('/admin/quantities/create');
+		}
+
+		if($product->category->name != 'Accessory' && $size->name == 'One Size') {
+			\Session::flash('danger', 'Wrong size! Shoes can not have \'One Size\'.');
+			return redirect('/admin/quantities/create');
+		}
 
 		try{
 			$quantity = Quantity::create([

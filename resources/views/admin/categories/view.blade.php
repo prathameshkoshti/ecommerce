@@ -39,14 +39,10 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						Additional Information:
-					</td>
-					<td>
-						Created At: {{$category->created_at}}<br>
-						Created By: {{$category->createdBy->name}}<br>
-						Updated At: {{$category->updated_at}}<br>
-						Updated By: {{$category->updated_by == '' ? 'NULL' : $category->updatedBy->name}}
+						<button class="btn btn-warning" onclick="location.href='/admin/categories/edit/{{$category->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+						<button class="btn btn-danger" onclick="location.href='/admin/categories/delete/{{$category->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 					</td>
 				</tr>
 			</table>

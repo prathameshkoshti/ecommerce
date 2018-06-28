@@ -44,7 +44,7 @@
 								Mobile No.:
 							</td>
 							<td>
-								<input type="tel" name="mobile_no" class="form-control" required>
+								<input type="tel" name="mobile_no" class="form-control">
 							</td>
 						</tr>
 						<tr>

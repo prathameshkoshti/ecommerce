@@ -120,14 +120,10 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						Additional Information:
-					</td>
-					<td>
-						Created By: {{$order->createdBy->name}}<br>
-						Created At: {{$order->created_at}}<br>
-						Updated By: {{$order->updatedBy->name}}<br>
-						Updated By: {{$order->updated_at}}
+						<button class="btn btn-warning" onclick="location.href='/admin/orders/edit/{{$order->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+						<button class="btn btn-danger" onclick="location.href='/admin/orders/delete/{{$order->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 					</td>
 				</tr>
 			</table>

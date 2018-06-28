@@ -53,7 +53,10 @@ class UserController extends Controller
 			$products_collection = collect([]);
 			foreach($categories_id as $id)
 			{
-				$products = Product::where('category_id', '=', $id)->get();
+				$products = Product::where([
+					['category_id', '=', $id],
+					['status', 1],
+					])->get();
 				foreach($products as $product)
 				{
 					$products_collection->push($product);
@@ -89,7 +92,7 @@ class UserController extends Controller
 			}
 		}
 
-		$materials_id = Category::where('name', 'like', '%'.$search_query.'%')->pluck('id');
+		$materials_id = Material::where('name', 'like', '%'.$search_query.'%')->pluck('id');
 		foreach($materials_id as $id)
 		{
 			$products = Product::where('material_id', '=', $id)->get();
@@ -339,7 +342,7 @@ class UserController extends Controller
 
 		$states = require_once(base_path().'/resources/views/libraries/states.php');
 
-		if($cart)
+		if($cart->isNotEmpty())
 			return view('users.checkout.checkout', compact('cart', 'shippings', 'states'));
 		return redirect('/');
 	}
@@ -369,6 +372,11 @@ class UserController extends Controller
 				'created_by' => Auth::user()->id,
 				'updated_by' => Auth::user()->id,
 			]);
+
+			$quantity = Quantity::find($cart_item->quantity_id);
+			$quantity->quantity -= $cart_item->ordered_quantity;
+			$quantity->save();
+
 			$cart_item->status = 0;
 			$cart_item->save();
 
@@ -376,7 +384,7 @@ class UserController extends Controller
 		}
 
 		\Session::flash('order_placed', 'Order Placed Successfully!');
-		return redirect('/my/checkout/order_placed');
+		return redirect('checkout/order_placed');
 	}
 
 	public function orderPlaced()
@@ -579,8 +587,8 @@ class UserController extends Controller
 	}
 
 	public function getReviews() {
-		$orders_without_rating = Order::doesntHave('rating')->latest()->take(3)->get();
-		$orders_with_rating = Order::has('rating')->paginate(2);
+		$orders_without_rating = Order::where('user_id', Auth::user()->id)->doesntHave('rating')->latest()->take(3)->get();
+		$orders_with_rating = Order::where('user_id', Auth::user()->id)->has('rating')->paginate(2);
 		return view('users.profile_settings.reviews.index', compact('orders_without_rating', 'orders_with_rating'));
 	}
 
@@ -700,7 +708,7 @@ class UserController extends Controller
 	}
 
 	public function getUnreviewed() {
-		$orders = Order::doesntHave('rating')->latest()->paginate(6);
+		$orders = Order::where('user_id', Auth::user()->id)->doesntHave('rating')->latest()->paginate(6);
 		return view('users.profile_settings.reviews.unreviewed', compact('orders'));
 	}
 }

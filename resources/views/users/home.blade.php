@@ -15,7 +15,7 @@
 						</p>
 						<p>
 						<div>
-							<button class="banner-btn btn" onclick="location.href='/all'">
+							<button class="banner-btn btn" onclick="location.href='/category/all'">
 								SHOP
 							</button>
 						</div>
@@ -32,23 +32,23 @@
 					BESTSELLERS
 				</div>
 				<div class="bs-products-container">
-					@foreach($products as $product)
+					@foreach($quantities as $quantity)
 						<div class="bs-product">
-							<a href="/product/view/{{$product->id}}">
+							<a href="/product/view/{{$quantity->product->id}}">
 							@php
-								$images = explode(',', $product->image_names);
+								$images = explode(',', $quantity->product->image_names);
 							@endphp
 							<div class="product-image">
-								<img width="200px" height="200px" src="{{url('storage/'.$product->category->name.'/'.$images[0])}}" alt="">
+								<img width="200px" height="200px" src="{{url('storage/'.$quantity->product->category->name.'/'.$images[0])}}" alt="">
 							</div>
 							<br>
 							<br>
 							<div class="product-info">
 								<div class="product-name">
-									{{$product->name}}
+									{{$quantity->product->name}}
 								</div>
 								<div class="product-price">
-									$ {{$product->price}}
+									$ {{$quantity->product->price}}
 								</div>
 							</div>
 							</a>

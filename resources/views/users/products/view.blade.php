@@ -51,7 +51,7 @@
 					<select name="size" class="form-control" id="size" required>
 						<option selected disabled>Select your shoe size</option>
 						@foreach($sizes as $size)
-						<option value="{{$size->size->id}}">{{$size->size->name}}</option>
+						<option value="{{$size->id}}">{{$size->size->name}}</option>
 						@endforeach
 					</select>
 					<br>
@@ -108,9 +108,9 @@
 		function validate() {
 			var select = document.getElementById('size');
 			var selected_size = select.options[select.selectedIndex].value;
-			alert(selected_size);
 			if(selected_size == 0) {
 				alert("Please select proper size");
+				return false;
 			}
 		}
 	</script>

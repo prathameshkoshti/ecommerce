@@ -136,7 +136,7 @@
 		</h3>
 	</div>
 </div>
-<form style="{{count($shippings) > 0  ? '' : 'display: block'}}" action="my/shipping_addresses/store" class="col-md-8 offset-md-1" method="POST" id="create-address-form">
+<form style="{{count($shippings) > 0  ? '' : 'display: block'}}" action="/my/address_book/store" class="col-md-8 offset-md-1" method="POST" id="create-address-form">
 	<div class="">
 		<h4>
 			New Shipping Address
@@ -315,6 +315,7 @@
 		if(!formValid) {
 			console.log(val);
 			alert('Please select your shipping address');
+			return false;
 		}
 	}
 

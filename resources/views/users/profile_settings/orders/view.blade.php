@@ -54,7 +54,7 @@
 					<br><br>
 					Shipping information:<br>
 					{{($order->shipping->address)}}<br>
-					@if($order->shipping->landmar)
+					@if($order->shipping->landmark)
 					{{($order->shipping->landmark)}}<br>
 					@endif
 					{{($order->shipping->city)}}<br>

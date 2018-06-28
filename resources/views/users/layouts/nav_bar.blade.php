@@ -37,11 +37,6 @@
 														Sneakers
 													</li>
 												</a>
-												<a href="/category/patinas" class="dropdown-item">
-													<li>
-														Patinas
-													</li>
-												</a>
 												<a href="/category/all" class="dropdown-item">
 													<li>
 														All
@@ -70,7 +65,7 @@
 					</ul>
 
 					<ul class="navbar-nav right-nav">
-						<li class="nav-item search" onclick="toggleSearch();">
+						<li class="nav-item search" onclick="toggleSearch()">
 							<i class="fa fa-search" id="search-icon"></i>
 						</li>
 						<div id="search-form">
@@ -118,7 +113,7 @@
 							<a href="/my/wishlist" class="active"><i class="fas fa-heart"></i></a>
 						</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<li class="nav-item cart">
-							<a href="/my/cart" class=""><i class="fa fa-shopping-bag"></i></a>
+							<a href="/my/cart" class="active"><i class="fa fa-shopping-bag"></i></a>
 						</li>
 					</ul>
 				</div>
@@ -137,14 +132,10 @@
 <script>
 	function toggleSearch(){
 		var search = document.getElementById("search-form");
-		var search_icon = document.getElementById("search-icon");
-		var search_input = document.getElementsByName("search");
 		if (search.style.display === "none") {
 			search.style.display = "block";
-			console.log('Display');
 		} else {
 			search.style.display = "none";
-			console.log('Hidden');
 		}
 	}
 	$(document).ready(function(){

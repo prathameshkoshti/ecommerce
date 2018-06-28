@@ -77,7 +77,13 @@
 						@endforeach
 					</tr>
                     </tbody>
-                  </table>
+				</table>
+
+				<div class="pagination-wrapper" style="text-center">
+					<div class="paginate">
+						{{$quantities->render()}}
+					</div>
+				</div>
           </div>
      </div>
 </div>

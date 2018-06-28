@@ -31,14 +31,10 @@
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
-							Additional Information:
-						</td>
-						<td>
-							Created By: {{$size->createdBy->name}}<br>
-							Created At: {{$size->created_at}}<br>
-							Updated By: {{$size->updatedBy->name}}<br>
-							Updated At: {{$size->updated_at}}
+							<button class="btn btn-warning" onclick="location.href='/admin/sizes/edit/{{$size->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+							<button class="btn btn-danger" onclick="location.href='/admin/sizes/delete/{{$size->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 						</td>
 					</tr>
 				</table>

@@ -1,15 +1,18 @@
 @if(Session :: has('warning'))
-<div class="col-md-4 alert alert-warning col-md-offset-4">
+<div class="col-md-4 alert alert-warning alert-dismissible col-md-offset-4">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <p class="font-weight-bold flash label label-warning"><h5>{{Session :: get('warning')}}</h5></p>
 </div>
 @endif
 @if(Session :: has('success'))
-<div class="col-md-4 alert alert-success col-md-offset-4">
+<div class="col-md-4 alert alert-success alert-dismissible col-md-offset-4">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <p class="font-weight-bold flash label label-success"><h5>{{Session :: get('success')}}</h5></p>
 </div>
 @endif
 @if(Session :: has('danger'))
-<div class="col-md-4 alert alert-danger col-md-offset-4">
+<div class="col-md-4 alert alert-danger alert-dismissible col-md-offset-4">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <p class="font-weight-bold flash label label-danger font-weight-bold"><h5>{{Session :: get('danger')}}</h5></p>
 </div>
 @endif
@@ -27,6 +30,9 @@
 	@endif
 </div>
 <style>
+	button i.fa-pencil, button i.fa-trash {
+		color: #fff;
+	}
 	.fa-trash{
 		color: #EF5350;
 	}
@@ -126,5 +132,12 @@
 		height: 20px;
 		background: #6553ad;
 		cursor: pointer;
+	}
+
+	.pagination-wrapper {
+		text-align: center;
+	}
+	.paginate {
+		display: inline-block;
 	}
 </style>

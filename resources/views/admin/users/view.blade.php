@@ -59,25 +59,21 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-							Additional Information:
-						</td>
-						<td>
-							Created At: {{$user->created_at}}<br>
-							Created By: {{$user->createdBy->name}}<br>
-							Updated At: {{$user->updated_at}}<br>
-							Updated By: {{$user->updatedBy->name}}
-						</td>
-					</tr>
-					<tr>
 					@if($user->isAdmin != 1)
 						<td>
 						</td>
 						<td>
-							<button class="btn btn-info"><i class="fa fa-shopping-cart" onclick="location.href='/admin/user/cart/{{$user->id}}'"> View Cart</i></button>
-							<button class="btn btn-primary" style="background-color: #EF5350;" onclick="location.href='/admin/user/wishlist/{{$user->id}}'"><i class="fa fa-heart"> View Wishlist</i></button>
+							<button class="btn btn-info"><i class="fa fa-shopping-cart" onclick="location.href='/admin/carts/view/{{$user->id}}'"> Cart</i></button>
+							<button class="btn btn-primary" style="background-color: #EF5350;" onclick="location.href='/admin/wishlists/view/{{$user->id}}'"><i class="fa fa-heart"> Wishlist</i></button>
 						</td>
 					@endif
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<button class="btn btn-warning" onclick="location.href='/admin/users/edit/{{$user->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+							<button class="btn btn-danger" onclick="location.href='/admin/users/delete/{{$user->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
+						</td>
 					</tr>
 				</table>
 			</div>

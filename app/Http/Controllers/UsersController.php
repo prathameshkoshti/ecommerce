@@ -41,17 +41,23 @@ class UsersController extends Controller
 			'name' => 'required',
 			'email' => 'required|email',
 			'password' => 'required|max:100|min:5',
-			'mobile_no' =>	'required|digit:10',
 		]);
 		$user = User::create([
 			'name' => request('name'),
 			'email' => request('email'),
-			'mobile_no' => request('mobile_no'),
 			'password' => bcrypt(request('password')),
 			'isAdmin' => ($request->isadmin == 'on' ? 1 : 0),
 			'created_by' => Auth::user()->id,
 			'updated_by' => Auth::user()->id,
-		]);
+			]);
+
+		if($request->mobile_no) {
+			$this->validate($request, [
+				'mobile_no' =>	'digits:10',
+			]);
+			$user->mobile_no = $request->mobile_no;
+			$user->save();
+		}
 
 		\Session::flash('success', 'User: '.$request->name.' added successfully!');
 		return redirect('/admin/users');
@@ -112,12 +118,17 @@ class UsersController extends Controller
 		$this->validate($request, [
 			'name' => 'required',
 			'email' => 'required|email',
-			'mobile_no' =>	'required|digit:10',
 		]);
+
 
 		$user->name = request('name');
 		$user->email = request('email');
-		$user->mobile_no = request('mobile_no');
+		if($request->mobile_no) {
+			$this->validate($request, [
+				'mobile_no' =>	'digits:10',
+			]);
+			$user->mobile_no = request('mobile_no');
+		}
 		$user->updated_by = Auth::user()->id;
 		$user->status = $request->status == 'on' ? 1 : 0;
 

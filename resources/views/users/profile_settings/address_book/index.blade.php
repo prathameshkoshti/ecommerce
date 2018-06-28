@@ -48,6 +48,12 @@
 		<h4>
 			Address Book
 		</h4>
+		@if($shippings->isEmpty())
+			<br><br>
+			<div class="col-md-12 alert alert-warning">
+				<p class="font-weight-bold flash label label-warning"><h5>No shipping addresses found.</h5></p>
+			</div>
+		@else
 		<div class="address-container">
 			@foreach($shippings as $shipping)
 			<div class="address">
@@ -75,6 +81,7 @@
 				{{$shippings->render()}}
 			</div>
 		</div>
+		@endif
 		<div class="create-button">
 			<button class="button" onclick="location.href='/my/address_book/create'"><i class="fa fa-plus"></i> Create New Address</button>
 		</div>

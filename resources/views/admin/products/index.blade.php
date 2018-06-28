@@ -45,8 +45,8 @@
 							Actions
 						</th>
 					</tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
 					@foreach($products as $product)
 					<tr>
 						<td>
@@ -77,10 +77,15 @@
 						</td>
 						@endforeach
 					</tr>
-                    </tbody>
-                  </table>
-          </div>
-     </div>
+                </tbody>
+			</table>
+			<div class="pagination-wrapper" style="text-center">
+				<div class="paginate">
+					{{$products->render()}}
+				</div>
+			</div>
+        </div>
+    </div>
 </div>
 @stop
 

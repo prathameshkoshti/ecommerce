@@ -185,19 +185,6 @@ Route::get('search/{search_query}', 'UserController@getProductsBySearch');
 Route::get('accessories', 'UserController@getAccessories');
 
 Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
-
-	Route::group(['prefix' => 'shipping_addresses'], function(){
-		Route::get('/', 'UserController@getShippings');
-
-		Route::get('create', 'UserController@createShippings');
-		Route::put('store', 'UserController@storeShippings');
-
-		Route::get('edit/{id}', 'UserController@editShippings');
-		Route::put('update/{id}', 'UserController@updateShippings');
-
-		Route::get('delete/{id}', 'UserController@deleteShippings');
-	});
-
 	Route::group(['prefix' => 'orders'], function(){
 		Route::get('/', 'UserController@getOrders');
 
@@ -239,7 +226,7 @@ Route::group(['prefix' => 'my', 'middleware' => 'checkUser'], function(){
 		Route::put('store', 'UserController@storeShipping');
 
 		Route::get('edit/{id}', 'UserController@editShipping');
-		Route::put('update/{id}', 'UserController@update`Shipping');
+		Route::put('update/{id}', 'UserController@updateShipping');
 
 		Route::get('delete/{id}', 'UserController@deleteShipping');
 	});

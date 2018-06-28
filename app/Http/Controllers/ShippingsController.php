@@ -64,7 +64,7 @@ class ShippingsController extends Controller
 		]);
 
 		\Session::flash('success', 'New shipping address created for user');
-		return redirect('/admin/shippongs');
+		return redirect('/admin/shippings');
 	}
 
     /**

@@ -58,6 +58,7 @@
 	.button {
 		border: none;
 		outline: none;
+		background: #fff;
 		border: 2px solid;
 		padding: 5px 10px;
 		width: 20%;
@@ -97,7 +98,6 @@
 	}
 </style>
 <div class="container">
-	@include('users.layouts.resources')
 	<div class="col-md-12 menu-container">
 		<h4>
 			<u><a href="/my/reviews/unreviewed" style="color: #212121">Products (Yet to be Rated)</a></u>
@@ -130,6 +130,11 @@
 		<br>
 		<hr>
 		<br>
+		@if($orders_with_rating->isEmpty())
+		<div class="col-md-12 alert alert-warning">
+			<p class="font-weight-bold flash label label-warning"><h5>You haven't reviewed any order yet.</h5></p>
+		</div>
+		@else
 		<h4>
 			Rated Products
 		</h4>
@@ -186,5 +191,6 @@
 			<br>
 		</div>
 	</div>
+	@endif
 </div>
 @stop

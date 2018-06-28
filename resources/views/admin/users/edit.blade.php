@@ -44,7 +44,7 @@
 								Mobile No.:
 							</td>
 							<td>
-								<input type="tel" name="mobile_no" class="form-control"  value="{{$user->mobile_no}}"required>
+								<input type="tel" name="mobile_no" class="form-control"  value="{{$user->mobile_no}}">
 							</td>
 						</tr>
 						<tr>

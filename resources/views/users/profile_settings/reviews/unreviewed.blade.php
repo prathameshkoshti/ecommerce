@@ -53,7 +53,11 @@
 		<h4>
 			Products (Yet to be Rated)
 		</h4>
-
+		@if($orders->isEmpty())
+		<div class="col-md-12 alert alert-warning">
+			<p class="font-weight-bold flash label label-warning"><h5>You have reviewed every order ofthe products.</h5></p>
+		</div>
+		@endif
 		<div class="unreviewed-products-container">
 			@foreach($orders as $order)
 			<div class="order">

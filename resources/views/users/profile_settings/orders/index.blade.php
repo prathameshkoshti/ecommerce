@@ -43,7 +43,12 @@
 	}
 </style>
 <div class="container">
-	@if($orders)
+	@if($orders->isEmpty())
+	<div class="col-md-12 alert alert-warning">
+		<p class="font-weight-bold flash label label-warning"><h5>No orders placed so far.</h5></p>
+	</div>
+	@endif
+	@if(count($orders))
 	<div class="col-md-12 menu-container">
 		<h4>
 			Orders
@@ -89,10 +94,6 @@
 				{{$orders->render()}}
 			</div>
 		</div>
-	</div>
-	@else
-	<div class="col-md-12 alert alert-warning">
-		<p class="font-weight-bold flash label label-warning"><h6>You have placed no orders.</h6></p>
 	</div>
 	@endif
 </div>

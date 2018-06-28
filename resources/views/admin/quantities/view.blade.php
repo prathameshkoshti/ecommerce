@@ -47,14 +47,10 @@
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
-							Additional Information:
-						</td>
-						<td>
-							Created By: {{$quantity->createdBy->name}}<br>
-							Created At: {{$quantity->created_at}}<br>
-							Updated By: {{$quantity->updatedBy->name}}<br>
-							Updated At: {{$quantity->updated_at}}
+							<button class="btn btn-warning" onclick="location.href='/admin/quantities/edit/{{$quantity->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+							<button class="btn btn-danger" onclick="location.href='/admin/quantities/delete/{{$quantity->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 						</td>
 					</tr>
 				</table>

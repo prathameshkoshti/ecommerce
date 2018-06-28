@@ -39,14 +39,10 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						Additional Information:
-					</td>
-					<td>
-						Created At: {{$material->created_at}}<br>
-						Created By: {{$material->createdBy->name}}<br>
-						Updated At: {{$material->updated_at}}<br>
-						Updated By: {{$material->updated_by == '' ? 'NULL' : $material->updatedBy->name}}
+						<button class="btn btn-warning" onclick="location.href='/admin/materials/edit/{{$material->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+						<button class="btn btn-danger" onclick="location.href='/admin/materials/delete/{{$material->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 					</td>
 				</tr>
 			</table>

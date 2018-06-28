@@ -77,14 +77,10 @@
 						</td>
 					</tr>
 					<tr>
+						<td></td>
 						<td>
-							Additional Information:
-						</td>
-						<td>
-							Created At: {{$product->created_at}}<br>
-							Created By: {{$product->createdBy->name}}<br>
-							Updated At: {{$product->updated_at}}<br>
-							Updated By: {{$product->updatedBy->name}}
+							<button class="btn btn-warning" onclick="location.href='/admin/products/edit/{{$product->id}}'"><i class="fa fa-pencil fa-lg"></i> Edit</button>
+							<button class="btn btn-danger" onclick="location.href='/admin/products/delete/{{$product->id}}'"><i class="fa fa-trash fa-lg"></i> Delete</button>
 						</td>
 					</tr>
 				</table>

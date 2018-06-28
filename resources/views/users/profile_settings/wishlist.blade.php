@@ -31,14 +31,26 @@
 		color: #212121;
 		font-size: 0.8em;
 	}
+	.fa-heart {
+		position: relative;
+		top: 4px;
+	}
 	@media only screen and (max-width: 1080px) {
 		.wishlist-container {
 			grid-template-columns: repeat(2, 1fr);
 		}
+		.fa-heart {
+			left: -312;
+			top: 0px;
+		}
 	}
 </style>
 <div class="container">
-	@if($wishlist)
+	@if($wishlist->isEmpty())
+	<div class="col-md-12 alert alert-warning">
+		<p class="font-weight-bold flash label label-warning"><h5>Your wishlist is empty.</h5></p>
+	</div>
+	@else
 	<div class="col-md-12 menu-container">
 		<h4>
 			Wishlist
@@ -75,10 +87,6 @@
 				{{$wishlist->render()}}
 			</div>
 		</div>
-	</div>
-	@else
-	<div class="col-md-12 alert alert-warning">
-		<p class="font-weight-bold flash label label-warning"><h6>You have placed no orders.</h6></p>
 	</div>
 	@endif
 </div>
