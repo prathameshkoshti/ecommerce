@@ -619,7 +619,7 @@ class UserController extends Controller
 		$order = Order::find($request->order);
 		if($order->user_id == Auth::user()->id) {
 			$this->validate($request, [
-				'order' => 'required|digits:1',
+				'order' => 'required|numeric',
 				'rating' => 'required|digits:1|min:1|max:5',
 			]);
 			try {
